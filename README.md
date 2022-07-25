@@ -54,3 +54,35 @@
 // use example
 dfsXyConv("toLL", 55, 127);
 ```
+
+## 학습 내용, 에러와의 싸움...
+
+### 객체 키와 값 추가 시 String으로 접근하지 못하는 문제 -- typescript
+
+> `에러 메시지`  
+> Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'. No index signature with a parameter of type 'string' was found on type '{}'.
+
+```javascript
+// const이므로 string type이 아닌 더 구체적이다. "this is string" type
+const a = "this is string";
+
+// let이므로 string의 모든 가능성을 열어둔다. string type
+let b = "this is string";
+```
+
+- Javascript에서는 런타임 전 `obj[somekey] = somevalue => obj["somekey"] = somevalue`로 obj의 key값을 자동으로 `string`으로 변환해준다.
+- Typescript에서는 자동으로 변환해주지 않기 때문에 key값의 type이 `string | number`이어야 한다.
+
+#### 해결
+
+```javascript
+// type을 동적으로 추가한다.
+// value type은 해당하는 type으로 할당하면 된다.
+// 나의 경우에는 객체를 받으므로 {}을 할당했다.
+const obj: {
+  [key: string]: {},
+} = {};
+```
+
+> 참고  
+> [`yyeonjju.log`](https://velog.io/@yyeonjju/TypeScript-Index-Signature-string-key%EB%A1%9C-%EA%B0%9D%EC%B2%B4%EC%97%90-%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0)
