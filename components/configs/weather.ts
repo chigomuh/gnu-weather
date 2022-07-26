@@ -7,13 +7,7 @@ export const categories = {
     PTY: {
       description: "강수형태",
       unit: null,
-      code: {
-        0: "없음",
-        1: "비",
-        2: "비/눈",
-        3: "눈",
-        4: "소나기",
-      },
+      code: ["없음", "비", "비/눈", "눈", "소나기"],
     },
     PCP: {
       description: "1시간 강수량",
@@ -30,11 +24,7 @@ export const categories = {
     SKY: {
       description: "하늘상태",
       unit: null,
-      code: {
-        1: "맑음",
-        3: "구름많음",
-        4: "흐림",
-      },
+      code: [null, "맑음", null, "구름많음", "흐림"],
     },
     TMP: {
       description: "1시간 기온",
@@ -93,15 +83,16 @@ export const categories = {
     PTY: {
       description: "강수형태",
       unit: null,
-      code: {
-        0: "없음",
-        1: "비",
-        2: "비/눈",
-        3: "눈",
-        5: "빗방울",
-        6: "빗방울눈날림",
-        7: "눈날림",
-      },
+      code: [
+        "없음",
+        "비",
+        "비/눈",
+        "눈",
+        null,
+        "빗방울",
+        "빗방울눈날림",
+        "눈날림",
+      ],
     },
     VEC: {
       description: "풍향",
@@ -124,11 +115,7 @@ export const categories = {
     SKY: {
       description: "하늘상태",
       unit: null,
-      code: {
-        1: "맑음",
-        3: "구름많음",
-        4: "흐림",
-      },
+      code: [null, "맑음", null, "구름많음", "흐림"],
     },
     UUU: {
       description: "동서바람성분",
@@ -145,15 +132,16 @@ export const categories = {
     PTY: {
       description: "강수형태",
       unit: null,
-      code: {
-        0: "없음",
-        1: "비",
-        2: "비/눈",
-        3: "눈",
-        5: "빗방울",
-        6: "빗방울눈날림",
-        7: "눈날림",
-      },
+      code: [
+        "없음",
+        "비",
+        "비/눈",
+        "눈",
+        null,
+        "빗방울",
+        "빗방울눈날림",
+        "눈날림",
+      ],
     },
     LGT: {
       description: "낙뢰",

@@ -36,22 +36,26 @@ import useWeather from "hooks/useWeather";
 const TodayWeather = () => {
   const xy = dfsXyConv("toXY", 36.087965369324, 128.36956444318);
 
-  const { data, success, isLoading, isError } = useWeather(
-    85,
-    95,
-    "chodangiyebo"
-  );
-
-  if (data) {
-    console.log(data);
-  }
+  const { data, isLoading, isError } = useWeather(85, 95, "chodangisil");
 
   if (isLoading) return <div>로딩</div>;
   if (isError) return <div>에러</div>;
 
   return (
     <>
-      <div></div>
+      {data && (
+        <div>
+          <div>현재기온: {data.categories.T1H}℃</div>
+          <div>
+            <div>기온차이: {`어제보다 ${data.categories.DIF}℃`}</div>
+            <div>
+              하늘상태:{" "}
+              {categories.chodangiyebo.SKY.code[Number(data.categories.SKY)]}
+            </div>
+          </div>
+          <div>습도: {data.categories.REH}%</div>
+        </div>
+      )}
     </>
   );
 };
