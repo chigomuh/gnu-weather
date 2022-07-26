@@ -42,6 +42,10 @@ const TodayWeather = () => {
     "chodangiyebo"
   );
 
+  if (data) {
+    console.log(data);
+  }
+
   if (isLoading) return <div>로딩</div>;
   if (isError) return <div>에러</div>;
 

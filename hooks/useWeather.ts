@@ -1,7 +1,8 @@
+import getChodangiyebo from "components/functions/getChodangiyebo";
 import plusZero from "components/functions/plusZero";
 import useSWR from "swr";
 
-interface Categories {
+export interface Categories {
   [index: string]: string | undefined;
   LGT?: string;
   PTY?: string;
@@ -15,7 +16,7 @@ interface Categories {
   WSD?: string;
 }
 
-interface Item {
+export interface Item {
   baseDate: string;
   baseTime: string;
   category: string;
@@ -50,55 +51,41 @@ const useWeather = (
   )}${plusZero(today.getDate())}`;
   const baseTime =
     today.getMinutes() < 30
-      ? `${plusZero(today.getHours() - 1)}00`
-      : `${plusZero(today.getHours())}00`;
+      ? `${plusZero(today.getHours() - 1)}30`
+      : `${plusZero(today.getHours())}30`;
+
+  const nowTime = (Number(baseTime) + 70).toString();
 
   const url = `${DEV}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
   const { data, error } = useSWR(url, fetcher);
+  const failReturnData = {
+    data,
+    success: false,
+    isLoading: !error && !data,
+    isError: error,
+  };
 
   if (data && data.data.response.body) {
-    let weatherData = {};
-    const items = data.data.response.body.items.item;
-    const categories: Categories = {};
-    const dates: {
-      [key: string]: {};
-    } = {};
-    const times: {
-      [key: string]: {};
-    } = {};
+    if (type === "chodangiyebo") {
+      const items = data.data.response.body.items.item;
+      const mainYebo = getChodangiyebo(items, nowTime);
 
-    items.forEach((item: Item) => {
-      categories[item.category] = item.fcstValue;
-      dates[item.fcstDate] = {
-        ...times,
-      };
-      times[item.fcstTime] = {
-        ...categories,
-      };
-
-      weatherData = {
-        fcstDates: {
-          ...dates,
-        },
-        nx: item.nx,
-        ny: item.ny,
-      };
-    });
-
-    return {
-      data: weatherData,
-      success: true,
-      isLoading: !error && !data,
-      isError: error,
-    };
+      if (mainYebo.success) {
+        return {
+          data: mainYebo.data,
+          success: true,
+          isLoading: !error && !data,
+          isError: error,
+        };
+      } else {
+        return failReturnData;
+      }
+    } else {
+      return failReturnData;
+    }
   } else {
-    return {
-      data,
-      success: false,
-      isLoading: !error && !data,
-      isError: error,
-    };
+    return failReturnData;
   }
 };
 
