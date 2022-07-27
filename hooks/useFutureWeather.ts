@@ -20,7 +20,7 @@ const useFutureWeather = (nx: number, ny: number) => {
     isError: error,
   };
 
-  if (data) {
+  if (data && data.data.response.body) {
     const items = data.data.response.body.items.item;
     const dangiData = getDangi(items);
 

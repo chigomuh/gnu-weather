@@ -20,6 +20,7 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
   } else {
     typeUrl = `${baseUrl}/getVilageFcst`;
   }
+  console.log("시간", baseTime);
 
   const URL = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
 

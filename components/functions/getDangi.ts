@@ -33,6 +33,7 @@ const getDangi = (items: Item[]) => {
     };
   } = {};
   const today = new Date(Date.now());
+
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
     const date = item.fcstDate;

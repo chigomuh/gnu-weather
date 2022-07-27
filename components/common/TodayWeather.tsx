@@ -31,6 +31,7 @@
 
 import { categories } from "components/configs/weather";
 import dfsXyConv from "components/functions/dfsXyConv";
+import getWindDeg from "components/functions/getWindDeg";
 import useWeather from "hooks/useWeather";
 
 const TodayWeather = () => {
@@ -40,24 +41,34 @@ const TodayWeather = () => {
 
   if (isLoading) return <div>로딩</div>;
   if (isError) return <div>에러</div>;
+  if (data) {
+    const category = data.categories;
 
-  return (
-    <>
-      {data && (
-        <div>
-          <div>현재기온: {data.categories.T1H}℃</div>
+    return (
+      <>
+        {data && (
           <div>
-            <div>기온차이: {`어제보다 ${data.categories.DIF}℃`}</div>
+            <div>현재기온: {category.T1H}℃</div>
             <div>
-              하늘상태:{" "}
-              {categories.chodangiyebo.SKY.code[Number(data.categories.SKY)]}
+              <div>기온차이: {`어제보다 ${category.DIF}℃`}</div>
+              <div>
+                하늘상태:{" "}
+                {categories.chodangiyebo.SKY.code[Number(category.SKY)]}
+              </div>
             </div>
+            <div>
+              강수형태: {categories.chodangisil.PTY.code[Number(category.PTY)]}
+            </div>
+            <div>습도: {category.REH}%</div>
+            <div>풍속: {category.WSD}</div>
+            <div>풍향: {getWindDeg(Number(category.VEC))}</div>
           </div>
-          <div>습도: {data.categories.REH}%</div>
-        </div>
-      )}
-    </>
-  );
+        )}
+      </>
+    );
+  } else {
+    return <>에러</>;
+  }
 };
 
 export default TodayWeather;
