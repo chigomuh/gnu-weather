@@ -1,3 +1,4 @@
+import getBaseDateTime from "components/functions/getBaseDateTime";
 import plusZero from "components/functions/plusZero";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -39,8 +40,11 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
     const baseTimeY = `${plusZero(today.getHours())}${plusZero(
       today.getMinutes() + 2
     )}`;
+
+    const { baseDate: baseDateSky, baseTime: baseTimeSky } =
+      getBaseDateTime("chodangiyebo");
     const URLY = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateY}&base_time=${baseTimeY}&nx=${nx}&ny=${ny}`;
-    const URLSky = `${baseUrl}/getUltraSrtFcst?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+    const URLSky = `${baseUrl}/getUltraSrtFcst?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateSky}&base_time=${baseTimeSky}&nx=${nx}&ny=${ny}`;
     const response = await fetch(URL);
     const responseY = await fetch(URLY);
     const responseSky = await fetch(URLSky);

@@ -36,7 +36,7 @@ import useWeather from "hooks/useWeather";
 const TodayWeather = () => {
   const xy = dfsXyConv("toXY", 36.087965369324, 128.36956444318);
 
-  const { data, isLoading, isError } = useWeather(85, 95, "chodangisil");
+  const { data, isLoading, isError } = useWeather(85, 95);
 
   if (isLoading) return <div>로딩</div>;
   if (isError) return <div>에러</div>;

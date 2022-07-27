@@ -1,22 +1,14 @@
+const passDayChangeTime = (time: string): string => {
+  return time === "2400" ? "0000" : time.length === 4 ? time : "0" + time;
+};
+
 const getNowTime = (baseTime: string): string => {
-  const passDayChangeTime = (time: string): string => {
-    if (time === "2400") {
-      return "0000";
-    } else {
-      if (time.length === 4) return time;
-      else return "0" + time;
-    }
-  };
+  const num =
+    baseTime[3] === "0"
+      ? (Number(baseTime) + 100).toString()
+      : (Number(baseTime) + 70).toString();
 
-  if (baseTime[3] === "0") {
-    const num = (Number(baseTime) + 100).toString();
-
-    return passDayChangeTime(num);
-  } else {
-    const num = (Number(baseTime) + 70).toString();
-
-    return passDayChangeTime(num);
-  }
+  return passDayChangeTime(num);
 };
 
 export default getNowTime;

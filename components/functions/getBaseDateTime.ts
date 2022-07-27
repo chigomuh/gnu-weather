@@ -1,7 +1,6 @@
-import { WeatherType } from "hooks/useWeather";
 import plusZero from "./plusZero";
 
-const getBaseDateTime = (type: WeatherType) => {
+const getBaseDateTime = (type: "chodangiyebo" | "chodangisil" | "dangi") => {
   const today = new Date(Date.now());
   let baseDate = `${today.getFullYear()}${plusZero(
     today.getMonth() + 1

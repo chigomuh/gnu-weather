@@ -1,7 +1,5 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import getChodangisil from "components/functions/getChodangisil";
-import getChodangiyebo from "components/functions/getChodangiyebo";
-import getDangi from "components/functions/getDangi";
 import getNowTime from "components/functions/getNowTime";
 import useSWR from "swr";
 
@@ -30,8 +28,6 @@ export interface Item {
   ny: number;
 }
 
-export type WeatherType = "chodangisil" | "chodangiyebo" | "dangi";
-
 const DEV = "http://localhost:3000";
 
 export const fetcher = async (url: string) => {
@@ -45,7 +41,8 @@ export const fetcher = async (url: string) => {
   return response.json();
 };
 
-const useWeather = (nx: number, ny: number, type: WeatherType) => {
+const useWeather = (nx: number, ny: number) => {
+  const type = "chodangisil";
   const { baseDate, baseTime } = getBaseDateTime(type);
   const nowTime = getNowTime(baseTime);
 
@@ -60,45 +57,17 @@ const useWeather = (nx: number, ny: number, type: WeatherType) => {
   };
 
   if (data && data.data.response.body) {
-    if (type === "chodangiyebo") {
-      const items = data.data.response.body.items.item;
-      const mainYebo = getChodangiyebo(items, nowTime);
+    const items = data.data.response.body.items.item;
+    const itemsY = data.dataY.response.body.items.item;
+    const itemsSky = data.dataSky.response.body.items.item;
+    const mainSil = getChodangisil(items, itemsY, itemsSky, nowTime);
 
-      if (mainYebo.success) {
-        return {
-          data: mainYebo.data,
-          success: true,
-          isLoading: !error && !data,
-          isError: error,
-        };
-      } else {
-        return failReturnData;
-      }
-    } else if (type === "chodangisil") {
-      const items = data.data.response.body.items.item;
-      const itemsY = data.dataY.response.body.items.item;
-      const itemsSky = data.dataSky.response.body.items.item;
-      const mainSil = getChodangisil(items, itemsY, itemsSky, nowTime);
-
-      return {
-        data: mainSil.data,
-        success: true,
-        isLoading: !error && !data,
-        isError: error,
-      };
-    } else if (type === "dangi") {
-      const items = data.data.response.body.items.item;
-      const dangiData = getDangi(items);
-
-      return {
-        data: dangiData,
-        success: true,
-        isLoading: !error && !data,
-        isError: error,
-      };
-    } else {
-      return failReturnData;
-    }
+    return {
+      data: mainSil.data,
+      success: true,
+      isLoading: !error && !data,
+      isError: error,
+    };
   } else {
     return failReturnData;
   }

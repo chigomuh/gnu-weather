@@ -1,7 +1,8 @@
-import useWeather from "hooks/useWeather";
+import useFutureWeather from "hooks/useFutureWeather";
+import React from "react";
 
 const FutureWeather = () => {
-  const { data, isLoading, isError } = useWeather(85, 95, "dangi");
+  const { data, isLoading, isError } = useFutureWeather(85, 95);
 
   console.log(data);
 
@@ -9,7 +10,18 @@ const FutureWeather = () => {
   if (isError) return <div>에러</div>;
   return (
     <>
-      <div>하하</div>
+      {data &&
+        data.map((weather) => (
+          <React.Fragment key={`${weather.fcstDate}${weather.fcstTime}`}>
+            <div className="flex">
+              <div>날짜: {weather.fcstDate}</div>
+              <div>시간: {weather.fcstTime}</div>
+              <div>기온: {weather.TMP}℃</div>
+              <div>습도: {weather.REH}</div>
+              <div>풍속: {weather.WSD}</div>
+            </div>
+          </React.Fragment>
+        ))}
     </>
   );
 };
