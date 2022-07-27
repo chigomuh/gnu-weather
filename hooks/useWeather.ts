@@ -1,6 +1,7 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import getChodangisil from "components/functions/getChodangisil";
 import getChodangiyebo from "components/functions/getChodangiyebo";
+import getDangi from "components/functions/getDangi";
 import getNowTime from "components/functions/getNowTime";
 import useSWR from "swr";
 
@@ -81,6 +82,16 @@ const useWeather = (nx: number, ny: number, type: WeatherType) => {
 
       return {
         data: mainSil.data,
+        success: true,
+        isLoading: !error && !data,
+        isError: error,
+      };
+    } else if (type === "dangi") {
+      const items = data.data.response.body.items.item;
+      const dangiData = getDangi(items);
+
+      return {
+        data: dangiData,
         success: true,
         isLoading: !error && !data,
         isError: error,

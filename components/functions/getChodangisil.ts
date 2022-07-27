@@ -40,6 +40,7 @@ const getChodangisil = (
     categoriesY[item.category] = item.obsrValue;
   });
   categories["SKY"] = sky;
+
   categories["DIF"] = (
     Math.round(
       (Number(categories["T1H"]) -
@@ -64,7 +65,7 @@ const getChodangisil = (
     };
   } else {
     return {
-      data: null,
+      data: undefined,
       success: false,
     };
   }

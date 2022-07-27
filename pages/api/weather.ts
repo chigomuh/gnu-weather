@@ -54,6 +54,14 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       dataY,
       dataSky,
     });
+  } else if (type === "dangi") {
+    const response = await fetch(URL);
+    const data = await response.json();
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
   } else {
     res.status(400).json({
       success: false,

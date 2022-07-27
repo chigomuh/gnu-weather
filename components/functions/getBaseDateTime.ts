@@ -21,6 +21,15 @@ const getBaseDateTime = (type: WeatherType) => {
     baseTime = baseTime + "30";
   } else if (type === "chodangisil") {
     baseTime = baseTime + "00";
+  } else if (type === "dangi") {
+    const dangiBaseTimes = [2, 5, 8, 11, 14, 17, 20, 23];
+    for (let i = 0; i < dangiBaseTimes.length; i++) {
+      const difTime = today.getHours() - dangiBaseTimes[i];
+      if (difTime < 3 && difTime >= 0) {
+        baseTime = dangiBaseTimes[i].toString() + "00";
+        break;
+      }
+    }
   }
 
   return { baseDate, baseTime };
