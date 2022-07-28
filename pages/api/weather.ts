@@ -1,6 +1,7 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import plusZero from "components/functions/plusZero";
 import type { NextApiRequest, NextApiResponse } from "next";
+import moment from "moment";
 
 const API_KEY = process.env.KOREA_PUBLIC_DATA_API_KEY;
 
@@ -50,11 +51,12 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       today.getMinutes() + 10
     )}`;
 
+    const testM = moment().subtract(1, "days");
+    console.log(testM.month() + 1);
+    console.log(testM.date());
+
     const { baseDate: baseDateSky, baseTime: baseTimeSky } =
       getBaseDateTime("chodangiyebo");
-
-    console.log("어제", baseDateY);
-    console.log("하늘", baseDateSky, baseTimeSky);
 
     const URLY = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateY}&base_time=${baseTimeY}&nx=${nx}&ny=${ny}`;
     const URLSky = `${baseUrl}/getUltraSrtFcst?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateSky}&base_time=${baseTimeSky}&nx=${nx}&ny=${ny}`;

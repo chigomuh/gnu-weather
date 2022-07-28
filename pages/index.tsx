@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import FutureWeather from "components/common/FutureWeather";
 import TodayWeather from "components/common/TodayWeather";
 import dfsXyConv from "components/functions/dfsXyConv";
+import getBaseDateTime from "components/functions/getBaseDateTime";
 
 const URL_ORIGIN = process.env.NEXT_PUBLIC_URL_ORIGIN;
 
@@ -28,6 +29,8 @@ const Home: NextPage = () => {
     } = event;
     setAddress(value);
   };
+
+  console.log(getBaseDateTime("chodangiyebo"));
 
   const onSubmitAddress = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
