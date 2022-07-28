@@ -17,15 +17,22 @@ const coords = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   ).json();
 
-  const { x: lng, y: lat } = data.documents[0];
+  if (data.documents.length !== 0) {
+    const { x: lng, y: lat } = data.documents[0];
 
-  res.status(200).json({
-    success: true,
-    data: {
-      lat,
-      lng,
-    },
-  });
+    res.status(200).json({
+      success: true,
+      data: {
+        lat,
+        lng,
+      },
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      data: undefined,
+    });
+  }
 };
 
 export default coords;

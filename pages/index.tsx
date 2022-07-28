@@ -6,8 +6,6 @@ import FutureWeather from "components/common/FutureWeather";
 import TodayWeather from "components/common/TodayWeather";
 import dfsXyConv from "components/functions/dfsXyConv";
 
-const DEV = "http://localhost:3000";
-
 const Home: NextPage = () => {
   const [address, setAddress] = useState("");
   const { position: currentPosition, error } = useCurrentPosition();
@@ -31,14 +29,22 @@ const Home: NextPage = () => {
 
   const onSubmitAddress = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (address === "") {
+      return;
+    }
 
-    const json = await (
-      await fetch(`${DEV}/api/coords?address=${address}`)
-    ).json();
-    const { lat: searchLat, lng: searchLng } = json.data;
+    const json = await (await fetch(`/api/coords?address=${address}`)).json();
 
-    setCurrentLat(Number(searchLat));
-    setCurrentLng(Number(searchLng));
+    if (json.data) {
+      const { lat: searchLat, lng: searchLng } = json.data;
+
+      setCurrentLat(Number(searchLat));
+      setCurrentLng(Number(searchLng));
+    } else {
+      alert("주소를 다시 확인해주세요.");
+    }
+
+    setAddress("");
   };
 
   useEffect(() => {

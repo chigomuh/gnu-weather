@@ -28,8 +28,6 @@ export interface Item {
   ny: number;
 }
 
-const DEV = "http://localhost:3000";
-
 export const fetcher = async (url: string) => {
   const response = await fetch(url);
 
@@ -46,7 +44,7 @@ const useWeather = (nx: number, ny: number) => {
   const { baseDate, baseTime } = getBaseDateTime(type);
   const nowTime = getNowTime(baseTime);
 
-  const url = `${DEV}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
+  const url = `/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
   const { data, error } = useSWR(url, fetcher);
   const failReturnData = {

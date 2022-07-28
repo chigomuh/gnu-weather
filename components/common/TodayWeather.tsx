@@ -45,8 +45,6 @@ import useWeather, { fetcher } from "hooks/useWeather";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-const DEV = "http://localhost:3000";
-
 interface Props {
   position: Position;
 }
@@ -65,11 +63,11 @@ const TodayWeather = ({ position }: Props) => {
     isError: weatherError,
   } = useWeather(x, y);
   const { data: addressData, error: addressError } = useSWR(
-    `${DEV}/api/address?lat=${lat}&lng=${lng}`,
+    `/api/address?lat=${lat}&lng=${lng}`,
     fetcher
   );
   const { data: dustData, error: dustError } = useSWR(
-    `${DEV}/api/dust?lat=${lat}&lng=${lng}`,
+    `/api/dust?lat=${lat}&lng=${lng}`,
     fetcher
   );
 
