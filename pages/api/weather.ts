@@ -43,7 +43,9 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (type === "chodangisil") {
     const today = moment().tz("Asia/Seoul");
-    const yesterday = moment(today.valueOf() - 24 * 60 * 60 * 1000);
+    const yesterday = moment(today.valueOf() - 24 * 60 * 60 * 1000).tz(
+      "Asia/Seoul"
+    );
 
     const baseDateY = `${yesterday.year()}${plusZero(
       yesterday.month() + 1
