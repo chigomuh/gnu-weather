@@ -1,7 +1,10 @@
+import moment from "moment-timezone";
 import plusZero from "./plusZero";
 
 const getBaseDateTime = (type: "chodangiyebo" | "chodangisil" | "dangi") => {
-  const today = new Date(Date.now());
+  const koreaTime = moment().tz("Asia/Seoul");
+
+  const today = new Date(koreaTime.valueOf());
   let baseDate = `${today.getFullYear()}${plusZero(
     today.getMonth() + 1
   )}${plusZero(today.getDate())}`;
@@ -28,7 +31,7 @@ const getBaseDateTime = (type: "chodangiyebo" | "chodangisil" | "dangi") => {
     for (let i = 0; i < dangiBaseTimes.length; i++) {
       const difTime = nowHours - dangiBaseTimes[i];
       if (difTime < 3 && difTime >= 0) {
-        baseTime = dangiBaseTimes[i].toString() + "00";
+        baseTime = plusZero(dangiBaseTimes[i]).toString() + "00";
         break;
       }
     }

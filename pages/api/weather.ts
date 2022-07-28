@@ -1,5 +1,6 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import plusZero from "components/functions/plusZero";
+import moment from "moment-timezone";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const API_KEY = process.env.KOREA_PUBLIC_DATA_API_KEY;
@@ -41,14 +42,14 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   } else if (type === "chodangisil") {
-    const nowTime = -new Date().getTimezoneOffset() / 60;
-    const today = new Date(Date.now() + nowTime * 60 * 60 * 1000);
-    const yesterday = new Date(Date.now() + (nowTime - 24) * 60 * 60 * 1000);
+    const today = moment().tz("Asia/Seoul");
+
+    const yesterday = new Date(today.valueOf() - 24 * 60 * 60 * 1000);
     const baseDateY = `${yesterday.getFullYear()}${plusZero(
       yesterday.getMonth() + 1
     )}${plusZero(yesterday.getDate())}`;
-    const baseTimeY = `${plusZero(today.getHours())}${plusZero(
-      today.getMinutes() + 10
+    const baseTimeY = `${plusZero(today.hours())}${plusZero(
+      today.minutes() + 10
     )}`;
 
     const { baseDate: baseDateSky, baseTime: baseTimeSky } =
