@@ -52,8 +52,13 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { baseDate: baseDateSky, baseTime: baseTimeSky } =
       getBaseDateTime("chodangiyebo");
+
+    console.log(baseDateSky, baseTimeSky);
+
     const URLY = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateY}&base_time=${baseTimeY}&nx=${nx}&ny=${ny}`;
     const URLSky = `${baseUrl}/getUltraSrtFcst?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateSky}&base_time=${baseTimeSky}&nx=${nx}&ny=${ny}`;
+
+    console.log(URLSky);
 
     try {
       const response = await fetch(URL);

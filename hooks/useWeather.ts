@@ -55,7 +55,13 @@ const useWeather = (nx: number, ny: number) => {
     isError: error,
   };
 
-  if (data && data.data.response.body) {
+  const isNullData =
+    !data ||
+    !data.data.response.body ||
+    !data.dataY.response.body ||
+    !data.dataSky.response.body;
+
+  if (!isNullData) {
     const items = data.data.response.body.items.item;
     const itemsY = data.dataY.response.body.items.item;
     const itemsSky = data.dataSky.response.body.items.item;
