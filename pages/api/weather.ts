@@ -2,14 +2,14 @@ import getBaseDateTime from "components/functions/getBaseDateTime";
 import plusZero from "components/functions/plusZero";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+const API_KEY = process.env.KOREA_PUBLIC_DATA_API_KEY;
+
+const baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0";
+
 const weather = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { baseDate, baseTime, nx, ny, type },
   } = req;
-
-  const API_KEY = process.env.WEATHER_API_KEY;
-
-  const baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0";
 
   let typeUrl: string;
 
@@ -20,7 +20,6 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
   } else {
     typeUrl = `${baseUrl}/getVilageFcst`;
   }
-  console.log("시간", baseTime);
 
   const URL = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
 

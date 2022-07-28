@@ -8,6 +8,12 @@
 - [ ] 현재 날씨, 미세먼지
 - [ ] 미래 날씨, 미세먼지
 
+## 기능 구현
+
+### 검색
+
+<img src="https://user-images.githubusercontent.com/84620459/181521924-2fbc187f-c6a7-4b0d-9e72-c876060a3c14.gif" width="500" height="500" />
+
 ## 기상청 API
 
 [기상청-공공데이터포털](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15084084)

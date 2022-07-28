@@ -1,4 +1,5 @@
 import { Item } from "hooks/useWeather";
+import plusZero from "./plusZero";
 
 interface WeatherData {
   PCP?: string;
@@ -33,13 +34,17 @@ const getDangi = (items: Item[]) => {
     };
   } = {};
   const today = new Date(Date.now());
+  const todayDate = `${today.getFullYear()}${plusZero(
+    today.getMonth() + 1
+  )}${plusZero(today.getDate())}`;
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
     const date = item.fcstDate;
     const time = item.fcstTime;
     const timeCo = Number(time);
-    if (date === "20220727" && timeCo <= today.getHours() * 100) {
+
+    if (date === todayDate && timeCo <= today.getHours() * 100) {
       continue;
     }
     if (result[date] === undefined) result[date] = {};

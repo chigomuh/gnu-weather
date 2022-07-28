@@ -28,25 +28,68 @@
  *  가져올 정보
  *  - 하늘상태
  */
+/**
+ * 위치
+ * 현재 위치 허용 -> 현재 위치 값 geoLocation -> 위경도
+ * 현재 위치 거부 -> 기본값 -> GNU 위경도
+ *
+ * 위치 검색 -> 검색한 위치 위경도(api 이용, kakao? 도로명주소? 고민 중)
+ */
 
+import { dustGrade } from "components/configs/dust";
 import { categories } from "components/configs/weather";
 import dfsXyConv from "components/functions/dfsXyConv";
 import getWindDeg from "components/functions/getWindDeg";
-import useWeather from "hooks/useWeather";
+import { Position } from "hooks/useCurrentPosition";
+import useWeather, { fetcher } from "hooks/useWeather";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
 
-const TodayWeather = () => {
-  const xy = dfsXyConv("toXY", 36.087965369324, 128.36956444318);
+const DEV = "http://localhost:3000";
 
-  const { data, isLoading, isError } = useWeather(85, 95);
+interface Props {
+  position: Position;
+}
+
+const TodayWeather = ({ position }: Props) => {
+  const { latitude, longitude } = position;
+  const lat = latitude ?? 35.1530444;
+  const lng = longitude ?? 128.1010899;
+  const [currentLat, setCurrentLat] = useState(lat);
+  const [currentLng, setCurrentLng] = useState(lng);
+
+  const { x, y } = dfsXyConv("toXY", currentLat, currentLng);
+  const {
+    data: weatherData,
+    isLoading: weatherLoading,
+    isError: weatherError,
+  } = useWeather(x, y);
+  const { data: addressData, error: addressError } = useSWR(
+    `${DEV}/api/address?lat=${lat}&lng=${lng}`,
+    fetcher
+  );
+  const { data: dustData, error: dustError } = useSWR(
+    `${DEV}/api/dust?lat=${lat}&lng=${lng}`,
+    fetcher
+  );
+
+  useEffect(() => {
+    setCurrentLat(lat);
+    setCurrentLng(lng);
+  }, [lat, lng]);
+
+  const isLoading = !weatherData || !addressData || !dustData;
+  const isError = weatherError || addressError || dustError;
 
   if (isLoading) return <div>로딩</div>;
   if (isError) return <div>에러</div>;
-  if (data) {
-    const category = data.categories;
+  if (!isLoading && !isError) {
+    const category = weatherData.categories;
 
     return (
       <>
-        {data && (
+        {addressData && <div>{addressData.data.documents[0].address_name}</div>}
+        {weatherData && (
           <div>
             <div>현재기온: {category.T1H}℃</div>
             <div>
@@ -63,6 +106,12 @@ const TodayWeather = () => {
             <div>풍속: {category.WSD}</div>
             <div>풍향: {getWindDeg(Number(category.VEC))}</div>
           </div>
+        )}
+        {dustData && (
+          <>
+            <div>미세먼지: {dustGrade[Number(dustData.data.pm10)]}</div>
+            <div>초미세먼지: {dustGrade[Number(dustData.data.pm25)]}</div>
+          </>
         )}
       </>
     );

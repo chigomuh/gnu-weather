@@ -5,10 +5,10 @@
  */
 
 interface Rs {
-  lat?: number;
-  lng?: number;
-  x?: number;
-  y?: number;
+  lat: number;
+  lng: number;
+  x: number;
+  y: number;
 }
 
 // LCC DFS 좌표변환을 위한 기초 자료
@@ -24,11 +24,7 @@ const YO = 136; // 기1준점 Y좌표(GRID)
 //
 // LCC DFS 좌표변환 ( code : "toXY"(위경도->좌표, v1:위도, v2:경도), "toLL"(좌표->위경도,v1:x, v2:y) )
 
-const dfsXyConv = (
-  code: "toXY" | "toLL",
-  v1: number,
-  v2: number
-): Rs | string => {
+const dfsXyConv = (code: "toXY" | "toLL", v1: number, v2: number): Rs => {
   const DEGRAD = Math.PI / 180.0;
   const RADDEG = 180.0 / Math.PI;
 
@@ -49,7 +45,12 @@ const dfsXyConv = (
   let ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
   ro = (re * sf) / Math.pow(ro, sn);
 
-  const rs: Rs = {};
+  const rs: Rs = {
+    lat: 0,
+    lng: 0,
+    x: 0,
+    y: 0,
+  };
   let ra;
   let theta;
   if (code === "toXY") {
@@ -93,7 +94,7 @@ const dfsXyConv = (
 
     return rs;
   } else {
-    return "check your code or xy";
+    return rs;
   }
 };
 
