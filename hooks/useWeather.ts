@@ -39,12 +39,13 @@ export const fetcher = async (url: string) => {
   return response.json();
 };
 
+const URL_ORIGIN = process.env.NEXT_PUBLIC_URL_ORIGIN;
+
 const useWeather = (nx: number, ny: number) => {
   const type = "chodangisil";
   const { baseDate, baseTime } = getBaseDateTime(type);
   const nowTime = getNowTime(baseTime);
-  const origin = window.location.origin;
-  const url = `${origin}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
+  const url = `${URL_ORIGIN}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
   const { data, error } = useSWR(url, fetcher);
   const failReturnData = {

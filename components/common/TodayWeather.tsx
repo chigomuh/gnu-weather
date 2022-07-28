@@ -49,6 +49,8 @@ interface Props {
   position: Position;
 }
 
+const URL_ORIGIN = process.env.NEXT_PUBLIC_URL_ORIGIN;
+
 const TodayWeather = ({ position }: Props) => {
   const { latitude, longitude } = position;
   const lat = latitude ?? 35.1530444;
@@ -62,13 +64,13 @@ const TodayWeather = ({ position }: Props) => {
     isLoading: weatherLoading,
     isError: weatherError,
   } = useWeather(x, y);
-  const origin = window.location.origin;
+
   const { data: addressData, error: addressError } = useSWR(
-    `${origin}/api/address?lat=${lat}&lng=${lng}`,
+    `${URL_ORIGIN}/api/address?lat=${lat}&lng=${lng}`,
     fetcher
   );
   const { data: dustData, error: dustError } = useSWR(
-    `${origin}/api/dust?lat=${lat}&lng=${lng}`,
+    `${URL_ORIGIN}/api/dust?lat=${lat}&lng=${lng}`,
     fetcher
   );
 

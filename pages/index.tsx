@@ -6,6 +6,8 @@ import FutureWeather from "components/common/FutureWeather";
 import TodayWeather from "components/common/TodayWeather";
 import dfsXyConv from "components/functions/dfsXyConv";
 
+const URL_ORIGIN = process.env.NEXT_PUBLIC_URL_ORIGIN;
+
 const Home: NextPage = () => {
   const [address, setAddress] = useState("");
   const { position: currentPosition, error } = useCurrentPosition();
@@ -32,10 +34,8 @@ const Home: NextPage = () => {
     if (address === "") {
       return;
     }
-    const origin = window.location.origin;
-    console.log(origin);
     const json = await (
-      await fetch(`${origin}/api/coords?address=${address}`)
+      await fetch(`${URL_ORIGIN}/api/coords?address=${address}`)
     ).json();
 
     if (json.data) {
