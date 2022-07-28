@@ -92,3 +92,5 @@ const obj: {
 
 > 참고  
 > [`yyeonjju.log`](https://velog.io/@yyeonjju/TypeScript-Index-Signature-string-key%EB%A1%9C-%EA%B0%9D%EC%B2%B4%EC%97%90-%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0)
+
+### 배포 시 origin 설정 문제
