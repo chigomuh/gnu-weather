@@ -38,7 +38,7 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       yesterday.getMonth() + 1
     )}${plusZero(yesterday.getDate())}`;
     const baseTimeY = `${plusZero(today.getHours())}${plusZero(
-      today.getMinutes() + 2
+      today.getMinutes() + 30
     )}`;
 
     const { baseDate: baseDateSky, baseTime: baseTimeSky } =
