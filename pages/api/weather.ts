@@ -51,6 +51,7 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = await response.json();
     const dataY = await responseY.json();
     const dataSky = await responseSky.json();
+    console.log(dataY.response.body.items);
 
     res.status(200).json({
       success: true,

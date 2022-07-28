@@ -60,6 +60,7 @@ const useWeather = (nx: number, ny: number) => {
     const itemsY = data.dataY.response.body.items.item;
     const itemsSky = data.dataSky.response.body.items.item;
     const mainSil = getChodangisil(items, itemsY, itemsSky, nowTime);
+    console.log(itemsY);
 
     return {
       data: mainSil.data,
