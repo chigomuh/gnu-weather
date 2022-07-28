@@ -76,6 +76,14 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
           URLY,
           URLSky,
         },
+        time: {
+          baseDate,
+          baseTime,
+          baseDateY,
+          baseTimeY,
+          baseDateSky,
+          baseTimeSky,
+        },
       });
     } catch (error) {
       console.error(error);

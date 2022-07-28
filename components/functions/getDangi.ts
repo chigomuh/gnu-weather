@@ -34,8 +34,7 @@ const getDangi = (items: Item[]) => {
       };
     };
   } = {};
-  const korea = moment().tz("Asia/Seoul").valueOf();
-  const today = moment(korea);
+  const today = moment().tz("Asia/Seoul");
   const todayDate = `${today.year()}${plusZero(today.month() + 1)}${plusZero(
     today.date()
   )}`;

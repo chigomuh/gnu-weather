@@ -2,9 +2,8 @@ import moment from "moment-timezone";
 import plusZero from "./plusZero";
 
 const getBaseDateTime = (type: "chodangiyebo" | "chodangisil" | "dangi") => {
-  const koreaTime = moment().tz("Asia/Seoul");
+  const today = moment().tz("Asia/Seoul");
 
-  const today = moment(koreaTime.valueOf());
   let baseDate = `${today.year()}${plusZero(today.month() + 1)}${plusZero(
     today.date()
   )}`;

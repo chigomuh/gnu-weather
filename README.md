@@ -97,3 +97,20 @@ const obj: {
 
 > 개발 환경에서는 Next.js 자체의 api 호출 시 `http://localhost:3000`을 origin으로 사용하는 반면에 배포 환경에서는 배포한 도메인 origin으로 설정해야 한다.  
 > .env.local 파일을 만들고 개발 환경에서는 `localhost`를 사용하고 배포 환경에서는 vercel에 환경 변수로 도메인을 설정하여 해결하였다.
+
+### 배포 시 Date API가 KST가 아닌 UTC로 적용되는 문제
+
+> 개발 환경에서는 자동으로 현재 위치를 기준으로 Date의 기준이 설정된다.  
+> 한국 기준은 KST로 UTC + 9시간이다. vercel로 배포를 하면 기준시간이 UTC로 설정되어 예상한 현재 시간을 기준으로 각각의 API를 호출하지 못했다. 한국을 기준 시간으로 정하여 해결 했다.
+
+- moment-timezone 라이브러리 사용
+
+```shell
+npm install moment-timezone --save
+```
+
+```javascript
+import moment from "moment-timezone";
+
+const koreaTime = moment().tz("Asia/Seoul"); // yyyy-mm-dd
+```
