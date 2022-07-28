@@ -6,8 +6,8 @@ import { fetcher } from "./useWeather";
 const useFutureWeather = (nx: number, ny: number) => {
   const type = "dangi";
   const { baseDate, baseTime } = getBaseDateTime(type);
-
-  const url = `/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
+  const origin = window.location.origin;
+  const url = `${origin}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
   const { data, error } = useSWR(url, fetcher);
 

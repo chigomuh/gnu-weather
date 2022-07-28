@@ -62,12 +62,13 @@ const TodayWeather = ({ position }: Props) => {
     isLoading: weatherLoading,
     isError: weatherError,
   } = useWeather(x, y);
+  const origin = window.location.origin;
   const { data: addressData, error: addressError } = useSWR(
-    `/api/address?lat=${lat}&lng=${lng}`,
+    `${origin}/api/address?lat=${lat}&lng=${lng}`,
     fetcher
   );
   const { data: dustData, error: dustError } = useSWR(
-    `/api/dust?lat=${lat}&lng=${lng}`,
+    `${origin}/api/dust?lat=${lat}&lng=${lng}`,
     fetcher
   );
 

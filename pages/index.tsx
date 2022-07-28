@@ -32,8 +32,11 @@ const Home: NextPage = () => {
     if (address === "") {
       return;
     }
-
-    const json = await (await fetch(`/api/coords?address=${address}`)).json();
+    const origin = window.location.origin;
+    console.log(origin);
+    const json = await (
+      await fetch(`${origin}/api/coords?address=${address}`)
+    ).json();
 
     if (json.data) {
       const { lat: searchLat, lng: searchLng } = json.data;
