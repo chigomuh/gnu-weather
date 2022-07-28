@@ -1,4 +1,5 @@
 import { Item } from "hooks/useWeather";
+import moment from "moment-timezone";
 import plusZero from "./plusZero";
 
 interface WeatherData {
@@ -33,10 +34,11 @@ const getDangi = (items: Item[]) => {
       };
     };
   } = {};
-  const today = new Date(Date.now());
-  const todayDate = `${today.getFullYear()}${plusZero(
-    today.getMonth() + 1
-  )}${plusZero(today.getDate())}`;
+  const korea = moment().tz("Asia/Seoul").valueOf();
+  const today = moment(korea);
+  const todayDate = `${today.year()}${plusZero(today.month() + 1)}${plusZero(
+    today.date()
+  )}`;
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
@@ -44,7 +46,7 @@ const getDangi = (items: Item[]) => {
     const time = item.fcstTime;
     const timeCo = Number(time);
 
-    if (date === todayDate && timeCo <= today.getHours() * 100) {
+    if (date === todayDate && timeCo <= today.hours() * 100) {
       continue;
     }
     if (result[date] === undefined) result[date] = {};

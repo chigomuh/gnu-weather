@@ -43,13 +43,13 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (type === "chodangisil") {
     const today = moment().tz("Asia/Seoul");
+    const yesterday = moment(today.valueOf() - 24 * 60 * 60 * 1000);
 
-    const yesterday = new Date(today.valueOf() - 24 * 60 * 60 * 1000);
-    const baseDateY = `${yesterday.getFullYear()}${plusZero(
-      yesterday.getMonth() + 1
-    )}${plusZero(yesterday.getDate())}`;
+    const baseDateY = `${yesterday.year()}${plusZero(
+      yesterday.month() + 1
+    )}${plusZero(yesterday.date())}`;
     const baseTimeY = `${plusZero(today.hours())}${plusZero(
-      today.minutes() + 10
+      today.minutes() + 5
     )}`;
 
     const { baseDate: baseDateSky, baseTime: baseTimeSky } =
