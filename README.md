@@ -94,3 +94,6 @@ const obj: {
 > [`yyeonjju.log`](https://velog.io/@yyeonjju/TypeScript-Index-Signature-string-key%EB%A1%9C-%EA%B0%9D%EC%B2%B4%EC%97%90-%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0)
 
 ### 배포 시 origin 설정 문제
+
+> 개발 환경에서는 Next.js 자체의 api 호출 시 `http://localhost:3000`을 origin으로 사용하는 반면에 배포 환경에서는 배포한 도메인 origin으로 설정해야 한다.  
+> .env.local 파일을 만들고 개발 환경에서는 `localhost`를 사용하고 배포 환경에서는 vercel에 환경 변수로 도메인을 설정하여 해결하였다.
