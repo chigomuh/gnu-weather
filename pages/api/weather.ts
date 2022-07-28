@@ -41,8 +41,9 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   } else if (type === "chodangisil") {
-    const today = new Date(Date.now());
-    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const nowTime = -new Date().getTimezoneOffset() / 60;
+    const today = new Date(Date.now() + nowTime * 60 * 60 * 1000);
+    const yesterday = new Date(Date.now() + (nowTime - 24) * 60 * 60 * 1000);
     const baseDateY = `${yesterday.getFullYear()}${plusZero(
       yesterday.getMonth() + 1
     )}${plusZero(yesterday.getDate())}`;
