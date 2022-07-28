@@ -8,18 +8,28 @@ const address = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { lat, lng },
   } = req;
-  const response = await fetch(`${baseUrl}?x=${lng}&y=${lat}`, {
-    method: "GET",
-    headers: {
-      Authorization: `KakaoAK ${API_KEY}`,
-    },
-  });
-  const data = await response.json();
 
-  res.status(200).json({
-    success: true,
-    data,
-  });
+  try {
+    const response = await fetch(`${baseUrl}?x=${lng}&y=${lat}`, {
+      method: "GET",
+      headers: {
+        Authorization: `KakaoAK ${API_KEY}`,
+      },
+    });
+    const data = await response.json();
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(400).json({
+      success: false,
+      data: undefined,
+    });
+  }
 };
 
 export default address;

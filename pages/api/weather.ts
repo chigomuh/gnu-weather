@@ -24,13 +24,22 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
   const URL = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
 
   if (type === "chodangiyebo") {
-    const response = await fetch(URL);
-    const data = await response.json();
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
 
-    res.status(200).json({
-      success: true,
-      data,
-    });
+      res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(400).json({
+        success: false,
+        data: undefined,
+      });
+    }
   } else if (type === "chodangisil") {
     const today = new Date(Date.now());
     const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -45,32 +54,50 @@ const weather = async (req: NextApiRequest, res: NextApiResponse) => {
       getBaseDateTime("chodangiyebo");
     const URLY = `${typeUrl}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateY}&base_time=${baseTimeY}&nx=${nx}&ny=${ny}`;
     const URLSky = `${baseUrl}/getUltraSrtFcst?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDateSky}&base_time=${baseTimeSky}&nx=${nx}&ny=${ny}`;
-    const response = await fetch(URL);
-    const responseY = await fetch(URLY);
-    const responseSky = await fetch(URLSky);
-    const data = await response.json();
-    const dataY = await responseY.json();
-    const dataSky = await responseSky.json();
-    console.log(dataY.response.body.items);
 
-    res.status(200).json({
-      success: true,
-      data,
-      dataY,
-      dataSky,
-    });
+    try {
+      const response = await fetch(URL);
+      const responseY = await fetch(URLY);
+      const responseSky = await fetch(URLSky);
+      const data = await response.json();
+      const dataY = await responseY.json();
+      const dataSky = await responseSky.json();
+
+      res.status(200).json({
+        success: true,
+        data,
+        dataY,
+        dataSky,
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(400).json({
+        success: false,
+        data: undefined,
+      });
+    }
   } else if (type === "dangi") {
-    const response = await fetch(URL);
-    const data = await response.json();
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
 
-    res.status(200).json({
-      success: true,
-      data,
-    });
+      res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(400).json({
+        success: false,
+        data: undefined,
+      });
+    }
   } else {
     res.status(400).json({
       success: false,
-      data: null,
+      data: undefined,
     });
   }
 };

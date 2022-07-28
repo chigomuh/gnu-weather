@@ -30,7 +30,6 @@ const getChodangisil = (
     [key: string]: string;
   } = {};
   const chodangiyebo = getChodangiyebo(itemsSky, nowTime);
-  console.log(chodangiyebo);
   const sky = chodangiyebo.data
     ? chodangiyebo.data.categories.SKY.toString()
     : "";
