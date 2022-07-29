@@ -3,7 +3,11 @@ interface Props {
 }
 
 const AddressName = ({ addressName }: Props) => {
-  return <div>{addressName}</div>;
+  return (
+    <>
+      <div className="text-center">{addressName}</div>
+    </>
+  );
 };
 
 export default AddressName;

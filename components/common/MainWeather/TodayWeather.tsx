@@ -68,13 +68,19 @@ const TodayWeather = ({ position }: Props) => {
 
   return (
     <>
-      {addressData && (
-        <AddressName addressName={addressData.data.documents[0].address_name} />
-      )}
-      {weatherData && <Weather category={weatherData.categories} />}
-      {dustData && (
-        <Dust pm10={+dustData.data.pm10} pm25={+dustData.data.pm25} />
-      )}
+      <div>
+        {addressData && (
+          <AddressName
+            addressName={addressData.data.documents[0].address_name}
+          />
+        )}
+        <div className="space-y-2">
+          {weatherData && <Weather category={weatherData.categories} />}
+          {dustData && (
+            <Dust pm10={+dustData.data.pm10} pm25={+dustData.data.pm25} />
+          )}
+        </div>
+      </div>
     </>
   );
 };

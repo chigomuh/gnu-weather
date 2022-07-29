@@ -60,7 +60,6 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo title="Home" />
-      <div>홈</div>
       <form onSubmit={onSubmitAddress}>
         <input type="text" onChange={onChangeAddress} value={address} />
         <button type="submit">검색</button>
