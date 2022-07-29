@@ -64,8 +64,10 @@ const Home: NextPage = () => {
         <input type="text" onChange={onChangeAddress} value={address} />
         <button type="submit">검색</button>
       </form>
-      {!error && <TodayWeather position={todayPosition} />}
-      <FutureWeather position={position} />
+      <div className="space-y-10">
+        {!error && <TodayWeather position={todayPosition} />}
+        <FutureWeather position={position} />
+      </div>
     </>
   );
 };

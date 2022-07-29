@@ -5,7 +5,7 @@ interface Props {
 const Humidity = ({ reh }: Props) => {
   return (
     <>
-      <div>습도: {reh}</div>
+      <div>{reh}%</div>
     </>
   );
 };

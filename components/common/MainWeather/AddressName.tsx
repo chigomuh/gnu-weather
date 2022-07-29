@@ -5,7 +5,7 @@ interface Props {
 const AddressName = ({ addressName }: Props) => {
   return (
     <>
-      <div className="text-center">{addressName}</div>
+      <div className="text-center text-xl font-bold">{addressName}</div>
     </>
   );
 };

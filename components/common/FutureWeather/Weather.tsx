@@ -8,8 +8,10 @@ interface Props {
 const Weather = ({ tmp, sky }: Props) => {
   return (
     <>
-      <div>기온: {tmp}℃</div>
-      <div>하늘상태: {categories.dangi.SKY.code[+sky]}</div>
+      <div>
+        <div>{tmp}℃</div>
+        <div>{categories.dangi.SKY.code[+sky]}</div>
+      </div>
     </>
   );
 };

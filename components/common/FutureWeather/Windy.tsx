@@ -8,8 +8,8 @@ interface Props {
 const Windy = ({ wsd, vec }: Props) => {
   return (
     <>
-      <div>풍속: {wsd}</div>
-      <div>풍향: {getWindDeg(+vec)}</div>
+      <div>{wsd}m/s</div>
+      <div>{getWindDeg(+vec)}풍</div>
     </>
   );
 };
