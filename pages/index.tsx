@@ -2,9 +2,9 @@ import Seo from "components/layout/Seo";
 import useCurrentPosition from "hooks/useCurrentPosition";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import type { NextPage } from "next";
-import FutureWeather from "components/common/FutureWeather";
-import TodayWeather from "components/common/TodayWeather";
 import dfsXyConv from "components/functions/dfsXyConv";
+import TodayWeather from "components/common/MainWeather/TodayWeather";
+import FutureWeather from "components/common/FutureWeather/FutureWeather";
 
 const URL_ORIGIN = process.env.NEXT_PUBLIC_URL_ORIGIN;
 

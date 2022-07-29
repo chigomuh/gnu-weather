@@ -10,10 +10,18 @@ interface ItemSil {
   obsrValue: string;
 }
 
-interface CategoriesSil {
+export interface CategoriesSil {
   [key: string]: string;
-  SKY: string;
   DIF: string;
+  PTY: string;
+  REH: string;
+  RN1: string;
+  SKY: string;
+  T1H: string;
+  UUU: string;
+  VEC: string;
+  VVV: string;
+  WSD: string;
 }
 
 const getChodangisil = (
@@ -23,8 +31,16 @@ const getChodangisil = (
   nowTime: string
 ) => {
   const categories: CategoriesSil = {
-    SKY: "",
     DIF: "",
+    PTY: "",
+    REH: "",
+    RN1: "",
+    SKY: "",
+    T1H: "",
+    UUU: "",
+    VEC: "",
+    VVV: "",
+    WSD: "",
   };
   const categoriesY: {
     [key: string]: string;

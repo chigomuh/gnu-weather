@@ -3,18 +3,19 @@ import moment from "moment-timezone";
 import plusZero from "./plusZero";
 
 interface WeatherData {
-  PCP?: string;
-  POP?: string;
-  PTY?: string;
-  REH?: string;
-  SKY?: string;
-  SNO?: string;
-  TMP?: string;
-  UUU?: string;
-  VEC?: string;
-  VVV?: string;
-  WAV?: string;
-  WSD?: string;
+  [key: string]: string | number;
+  PCP: string;
+  POP: string;
+  PTY: string;
+  REH: string;
+  SKY: string;
+  SNO: string;
+  TMP: string;
+  UUU: string;
+  VEC: string;
+  VVV: string;
+  WAV: string;
+  WSD: string;
   fcstDate: string;
   fcstTime: string;
   nx: number;
@@ -25,13 +26,7 @@ const getDangi = (items: Item[]) => {
   const data = [...items];
   const result: {
     [key: string]: {
-      [key: string]: {
-        [key: string]: string | number;
-        fcstDate: string;
-        fcstTime: string;
-        nx: number;
-        ny: number;
-      };
+      [key: string]: WeatherData;
     };
   } = {};
   const today = moment().tz("Asia/Seoul");
@@ -51,6 +46,18 @@ const getDangi = (items: Item[]) => {
     if (result[date] === undefined) result[date] = {};
     if (result[date][time] === undefined)
       result[date][time] = {
+        PCP: "",
+        POP: "",
+        PTY: "",
+        REH: "",
+        SKY: "",
+        SNO: "",
+        TMP: "",
+        UUU: "",
+        VEC: "",
+        VVV: "",
+        WAV: "",
+        WSD: "",
         fcstDate: "",
         fcstTime: "",
         nx: 0,
