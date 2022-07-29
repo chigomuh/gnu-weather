@@ -14,6 +14,10 @@
 
 <img src="https://user-images.githubusercontent.com/84620459/181521924-2fbc187f-c6a7-4b0d-9e72-c876060a3c14.gif" width="500" height="500" />
 
+### 슬라이더
+
+<img src="https://user-images.githubusercontent.com/84620459/181792188-898a26ce-f6a5-47b3-8de3-279502786e95.gif" width="300" height="500" />
+
 ## 기상청 API
 
 [기상청-공공데이터포털](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15084084)

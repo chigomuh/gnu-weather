@@ -59,6 +59,7 @@ const FutureWeather = ({ position }: Props) => {
       <div className="overflow-x-hidden">
         <div className="flex space-x-10 w-full justify-center h-10 items-center text-xl">
           <button
+            className="cursor-pointer"
             style={{
               opacity: currenOpenTap === "weather" ? 1 : 0.5,
             }}
@@ -67,6 +68,7 @@ const FutureWeather = ({ position }: Props) => {
             날씨
           </button>
           <button
+            className="cursor-pointer"
             style={{
               opacity: currenOpenTap === "precipitation" ? 1 : 0.5,
             }}
@@ -75,6 +77,7 @@ const FutureWeather = ({ position }: Props) => {
             강수
           </button>
           <button
+            className="cursor-pointer"
             style={{
               opacity: currenOpenTap === "windy" ? 1 : 0.5,
             }}
@@ -83,6 +86,7 @@ const FutureWeather = ({ position }: Props) => {
             바람
           </button>
           <button
+            className="cursor-pointer"
             style={{
               opacity: currenOpenTap === "humidity" ? 1 : 0.5,
             }}
@@ -93,7 +97,7 @@ const FutureWeather = ({ position }: Props) => {
         </div>
         <div className="relative flex justify-center">
           <button
-            className="absolute top-1/2 left-0 -translate-y-[50%] w-10 h-full flex justify-center items-center"
+            className="absolute top-1/2 left-0 -translate-y-[50%] w-10 h-full flex justify-center items-center cursor-pointer"
             onClick={() => onClickSlider("left")}
           >
             <Image
@@ -104,7 +108,7 @@ const FutureWeather = ({ position }: Props) => {
             />
           </button>
           <button
-            className="absolute top-1/2 right-0 -translate-y-[50%] w-10 h-full rotate-180 flex justify-center items-center"
+            className="absolute top-1/2 right-0 -translate-y-[50%] w-10 h-full rotate-180 flex justify-center items-center cursor-pointer"
             onClick={() => onClickSlider("right")}
           >
             <Image
