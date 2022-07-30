@@ -134,7 +134,12 @@ const FutureWeather = ({ position }: Props) => {
                     <div>
                       <div>{weather.fcstDate.slice(4)}</div>
                       {currenOpenTap === "weather" && (
-                        <Weather tmp={weather.TMP} sky={weather.SKY} />
+                        <Weather
+                          tmp={weather.TMP}
+                          sky={weather.SKY}
+                          pty={weather.PTY}
+                          time={weather.fcstTime}
+                        />
                       )}
                       {currenOpenTap === "precipitation" && (
                         <Precipitation pop={weather.POP} pcp={weather.PCP} />

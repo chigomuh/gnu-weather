@@ -13,7 +13,7 @@ const Weather = ({ category }: Props) => {
       <div className="space-y-4">
         <div className="flex justify-center relative">
           <Image
-            src="/images/gnu-basic.png"
+            src="/images/mascot/gnu-basic.png"
             width={200}
             height={200}
             alt="gnu-mascot"

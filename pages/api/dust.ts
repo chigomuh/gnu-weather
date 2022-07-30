@@ -119,24 +119,31 @@ const dust = async (req: NextApiRequest, res: NextApiResponse) => {
 
     let pm10;
     let pm25;
+    let pm10Value;
+    let pm25Value;
     let station;
 
     for (let i = 0; i < stations.length; i++) {
       const {
-        data: { pm10Grade, pm25Grade },
+        data: { pm10Grade, pm25Grade, pm10Value: pm10V, pm25Value: pm25V },
         stationName,
       } = await getDust(baseUrlDust, PUBLIC_API_KEY, stations[i].stationName);
 
       if (pm10Grade && pm25Grade) {
         pm10 = pm10Grade;
         pm25 = pm25Grade;
+        pm10Value = pm10V;
+        pm25Value = pm25V;
         station = stationName;
+        break;
       }
     }
 
     const data = {
       pm10,
       pm25,
+      pm10Value,
+      pm25Value,
       station,
     };
 

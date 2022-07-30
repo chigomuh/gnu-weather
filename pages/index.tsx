@@ -148,7 +148,6 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="space-y-10">
-        {/* {!error && <TodayWeather position={todayPosition} />} */}
         <TodayWeather position={todayPosition} />
         <FutureWeather position={position} />
       </div>

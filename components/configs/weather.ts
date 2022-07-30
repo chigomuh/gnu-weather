@@ -8,6 +8,13 @@ export const categories = {
       description: "강수형태",
       unit: null,
       code: ["없음", "비", "비/눈", "눈", "소나기"],
+      iconPath: [
+        null,
+        "/images/weather/sky/NB08.png",
+        "/images/weather/sky/NB12.png",
+        "/images/weather/sky/NB11.png",
+        "/images/weather/sky/NB07.png",
+      ],
     },
     PCP: {
       description: "1시간 강수량",
@@ -25,6 +32,24 @@ export const categories = {
       description: "하늘상태",
       unit: null,
       code: [null, "맑음", null, "구름많음", "흐림"],
+      day: {
+        iconPath: [
+          null,
+          "/images/weather/day/NB01.png",
+          null,
+          "/images/weather/day/NB03.png",
+          "/images/weather/day/NB04.png",
+        ],
+      },
+      night: {
+        iconPath: [
+          null,
+          "/images/weather/night/NB01_N.png",
+          null,
+          "/images/weather/night/NB03_N.png",
+          "/images/weather/day/NB04.png",
+        ],
+      },
     },
     TMP: {
       description: "1시간 기온",

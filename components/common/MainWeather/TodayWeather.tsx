@@ -36,6 +36,8 @@ interface DustData {
   data: {
     pm10: string;
     pm25: string;
+    pm10Value: string;
+    pm25Value: string;
     station: string;
   };
 }
@@ -79,7 +81,12 @@ const TodayWeather = ({ position }: Props) => {
           )}
           {weatherData && <Weather category={weatherData.categories} />}
           {dustData && (
-            <Dust pm10={+dustData.data.pm10} pm25={+dustData.data.pm25} />
+            <Dust
+              pm10={+dustData.data.pm10}
+              pm25={+dustData.data.pm25}
+              pm10Value={+dustData.data.pm10Value}
+              pm25Value={+dustData.data.pm25Value}
+            />
           )}
         </div>
       </div>
