@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Dust from "components/common/MainWeather/Dust";
 import Weather from "components/common/MainWeather/Weather";
-import AddressName from "./AddressName";
+import AddressName from "components/common/MainWeather/AddressName";
 
 interface Props {
   position: Position;

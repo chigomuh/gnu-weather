@@ -1,10 +1,12 @@
 import useFutureWeather from "hooks/useFutureWeather";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Weather from "components/common/FutureWeather/Weather";
-import Precipitation from "./Precipitation";
-import Windy from "./Windy";
-import Humidity from "./Humidity";
-import Image from "next/image";
+import Precipitation from "components/common/FutureWeather/Precipitation";
+import Windy from "components/common/FutureWeather/Windy";
+import Humidity from "components/common/FutureWeather/Humidity";
+import FcstTime from "components/common/FutureWeather/FcstTime";
+import ButtonTap from "components/common/ButtonTap";
+import Arrow from "components/common/Arrow";
 
 interface Props {
   position: {
@@ -45,9 +47,7 @@ const FutureWeather = ({ position }: Props) => {
     }
   };
 
-  const onClickTap = (
-    type: "weather" | "precipitation" | "windy" | "humidity"
-  ) => {
+  const onClickTap = (type: string) => {
     setCurrenOpenTap(type);
     setSliderX(0);
   };
@@ -58,66 +58,34 @@ const FutureWeather = ({ position }: Props) => {
     <>
       <div className="overflow-x-hidden">
         <div className="flex space-x-10 w-full justify-center h-10 items-center text-xl">
-          <button
-            className="cursor-pointer"
-            style={{
-              opacity: currenOpenTap === "weather" ? 1 : 0.5,
-            }}
-            onClick={() => onClickTap("weather")}
-          >
-            날씨
-          </button>
-          <button
-            className="cursor-pointer"
-            style={{
-              opacity: currenOpenTap === "precipitation" ? 1 : 0.5,
-            }}
-            onClick={() => onClickTap("precipitation")}
-          >
-            강수
-          </button>
-          <button
-            className="cursor-pointer"
-            style={{
-              opacity: currenOpenTap === "windy" ? 1 : 0.5,
-            }}
-            onClick={() => onClickTap("windy")}
-          >
-            바람
-          </button>
-          <button
-            className="cursor-pointer"
-            style={{
-              opacity: currenOpenTap === "humidity" ? 1 : 0.5,
-            }}
-            onClick={() => onClickTap("humidity")}
-          >
-            습도
-          </button>
+          <ButtonTap
+            tapId="weather"
+            title="날씨"
+            currentOpen={currenOpenTap}
+            onClick={onClickTap}
+          />
+          <ButtonTap
+            tapId="precipitation"
+            title="강수"
+            currentOpen={currenOpenTap}
+            onClick={onClickTap}
+          />
+          <ButtonTap
+            tapId="windy"
+            title="바람"
+            currentOpen={currenOpenTap}
+            onClick={onClickTap}
+          />
+          <ButtonTap
+            tapId="humidity"
+            title="습도"
+            currentOpen={currenOpenTap}
+            onClick={onClickTap}
+          />
         </div>
         <div className="relative flex justify-center">
-          <button
-            className="absolute top-1/2 left-0 -translate-y-[50%] w-10 h-full flex justify-center items-center cursor-pointer"
-            onClick={() => onClickSlider("left")}
-          >
-            <Image
-              src="/svgs/leftArrow.svg"
-              alt="left-arrow"
-              width="30"
-              height="30"
-            />
-          </button>
-          <button
-            className="absolute top-1/2 right-0 -translate-y-[50%] w-10 h-full rotate-180 flex justify-center items-center cursor-pointer"
-            onClick={() => onClickSlider("right")}
-          >
-            <Image
-              src="/svgs/leftArrow.svg"
-              alt="left-arrow"
-              width="30"
-              height="30"
-            />
-          </button>
+          <Arrow direction="left" onClick={onClickSlider} />
+          <Arrow direction="right" onClick={onClickSlider} />
           <div className="w-4/5 overflow-x-hidden text-center">
             <div
               className="flex space-x-4 whitespace-nowrap transition-transform duration-300"
@@ -131,8 +99,7 @@ const FutureWeather = ({ position }: Props) => {
                   <React.Fragment
                     key={`${weather.fcstDate}${weather.fcstTime}`}
                   >
-                    <div>
-                      <div>{weather.fcstDate.slice(4)}</div>
+                    <div className="space-y-2">
                       {currenOpenTap === "weather" && (
                         <Weather
                           tmp={weather.TMP}
@@ -150,7 +117,10 @@ const FutureWeather = ({ position }: Props) => {
                       {currenOpenTap === "humidity" && (
                         <Humidity reh={weather.REH} />
                       )}
-                      <div>{weather.fcstTime.slice(0, 2)}시</div>
+                      <FcstTime
+                        date={weather.fcstDate}
+                        time={weather.fcstTime}
+                      />
                     </div>
                   </React.Fragment>
                 ))}

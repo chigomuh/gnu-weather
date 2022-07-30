@@ -8,6 +8,10 @@ interface Props {
 }
 
 const Weather = ({ category }: Props) => {
+  const { DIF } = category;
+  const isPlus = parseFloat(DIF) >= 0;
+  const dif = isPlus ? parseFloat(DIF) : -parseFloat(DIF);
+
   return (
     <>
       <div className="space-y-4">
@@ -22,10 +26,25 @@ const Weather = ({ category }: Props) => {
         <div className="space-y-2 flex flex-col items-center">
           <div className="text-6xl font-bold">{category.T1H}°</div>
           <div className="flex text-2xl space-x-4">
-            <div>{`어제보다 ${category.DIF}°`}</div>
-            <div>{categories.chodangiyebo.SKY.code[+category.SKY]}</div>
-            {category.PTY !== "0" && (
+            <div className="flex items-center justify-center">
+              <div>{dif === 0 ? `어제와 동일해요 / ` : `어제보다 ${dif}°`}</div>
+              <div
+                className={`${isPlus ? "" : "rotate-180"}${
+                  dif === 0 ? "hidden" : ""
+                } flex items-center justify-center`}
+              >
+                <Image
+                  src="/svgs/topArrow.svg"
+                  alt="arrow-icon"
+                  width={30}
+                  height={30}
+                />
+              </div>
+            </div>
+            {category.PTY !== "0" ? (
               <div>{categories.chodangisil.PTY.code[+category.PTY]}</div>
+            ) : (
+              <div>{categories.chodangiyebo.SKY.code[+category.SKY]}</div>
             )}
           </div>
           <div className="flex space-x-4">

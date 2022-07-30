@@ -124,3 +124,10 @@ const year = koreaTime.year(); // yyyy
 const month = koreaTime.month(); // mm
 const date = koreaTime.date(); // dd
 ```
+
+### 강수 확률 물방울 모양
+
+> 물방울을 강수확률을 이용하여 채우기 위해서 물방울을 만들어야 했다.  
+> 막막하였으나 하나의 사이트를 발견하여 쉽게 해결하였다
+
+- [`fancy-border-radius`](https://9elements.github.io/fancy-border-radius/full-control.html)
