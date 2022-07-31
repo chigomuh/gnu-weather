@@ -1,5 +1,5 @@
 import useFutureWeather from "hooks/useFutureWeather";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Weather from "components/common/FutureWeather/Weather";
 import Precipitation from "components/common/FutureWeather/Precipitation";
 import Windy from "components/common/FutureWeather/Windy";
@@ -7,6 +7,25 @@ import Humidity from "components/common/FutureWeather/Humidity";
 import FcstTime from "components/common/FutureWeather/FcstTime";
 import ButtonTap from "components/common/ButtonTap";
 import Arrow from "components/common/Arrow";
+
+const userControlTap = [
+  {
+    id: "weather",
+    title: "날씨",
+  },
+  {
+    id: "precipitation",
+    title: "강수",
+  },
+  {
+    id: "windy",
+    title: "바람",
+  },
+  {
+    id: "humidity",
+    title: "습도",
+  },
+];
 
 interface Props {
   position: {
@@ -54,50 +73,36 @@ const FutureWeather = ({ position }: Props) => {
 
   return (
     <>
-      <div className="overflow-x-hidden">
-        <div className="flex space-x-10 w-full justify-center h-10 items-center text-xl">
-          <ButtonTap
-            tapId="weather"
-            title="날씨"
-            currentOpen={currenOpenTap}
-            onClick={onClickTap}
-          />
-          <ButtonTap
-            tapId="precipitation"
-            title="강수"
-            currentOpen={currenOpenTap}
-            onClick={onClickTap}
-          />
-          <ButtonTap
-            tapId="windy"
-            title="바람"
-            currentOpen={currenOpenTap}
-            onClick={onClickTap}
-          />
-          <ButtonTap
-            tapId="humidity"
-            title="습도"
-            currentOpen={currenOpenTap}
-            onClick={onClickTap}
-          />
-        </div>
-        <div className="relative flex justify-center">
-          <Arrow direction="left" onClick={onClickSlider} />
-          <Arrow direction="right" onClick={onClickSlider} />
-          <div className="w-4/5 overflow-x-hidden text-center">
-            <div
-              className="flex space-x-4 whitespace-nowrap transition-transform duration-300"
-              style={{
-                transform: `translateX(-${sliderX}px)`,
-              }}
-              ref={SliderRef}
-            >
-              {data &&
-                data.map((weather) => (
-                  <React.Fragment
-                    key={`${weather.fcstDate}${weather.fcstTime}`}
-                  >
-                    <div className="space-y-2 flex flex-col items-center">
+      <div className="w-full flex justify-center items-center">
+        <div className="overflow-x-hidden w-full max-w-4xl">
+          <div className="flex space-x-10 w-full justify-center h-10 items-center text-xl">
+            {userControlTap.map((tap) => (
+              <ButtonTap
+                key={tap.id}
+                tapId={tap.id}
+                title={tap.title}
+                currentOpen={currenOpenTap}
+                onClick={onClickTap}
+              />
+            ))}
+          </div>
+          <div className="relative flex justify-center">
+            <Arrow direction="left" onClick={onClickSlider} />
+            <Arrow direction="right" onClick={onClickSlider} />
+            <div className="w-4/5 h-full overflow-x-hidden text-center">
+              <div
+                className="flex space-x-4 whitespace-nowrap transition-transform duration-300"
+                style={{
+                  transform: `translateX(-${sliderX}px)`,
+                }}
+                ref={SliderRef}
+              >
+                {data &&
+                  data.map((weather) => (
+                    <div
+                      key={`${weather.fcstDate}${weather.fcstTime}`}
+                      className="space-y-2 flex flex-col items-center"
+                    >
                       {currenOpenTap === "weather" && (
                         <Weather
                           tmp={weather.TMP}
@@ -120,8 +125,8 @@ const FutureWeather = ({ position }: Props) => {
                         time={weather.fcstTime}
                       />
                     </div>
-                  </React.Fragment>
-                ))}
+                  ))}
+              </div>
             </div>
           </div>
         </div>

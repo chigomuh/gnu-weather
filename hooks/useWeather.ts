@@ -1,6 +1,5 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import getChodangisil from "components/functions/getChodangisil";
-import getDangi from "components/functions/getDangi";
 import getNowTime from "components/functions/getNowTime";
 import useSWR from "swr";
 

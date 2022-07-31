@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     <>
       <Seo title="Home" />
       <Nav setCurrentLat={setCurrentLat} setCurrentLng={setCurrentLng} />
-      <div className="space-y-10">
+      <div className="space-y-8">
         <TodayWeather position={todayPosition} />
         <Suspense fallback={<BoxSK />}>
           <FutureWeather position={position} />

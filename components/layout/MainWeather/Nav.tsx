@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ChangeEvent,
   Dispatch,
@@ -113,67 +114,73 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between w-full p-2">
-        <div className="flex items-center justify-center">
-          <Image
-            src="/images/my-logo.png"
-            alt="logo"
-            width={30}
-            height={30}
-            className="rounded-md"
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <form
-            onSubmit={onSubmitAddress}
-            className="flex items-center justify-end relative"
+      <div className="flex w-full justify-center items-center">
+        <div className="flex items-center justify-between w-full max-w-4xl p-2">
+          <input type="checkbox" id="logoInput" className="hidden peer" />
+          <label
+            htmlFor="logoInput"
+            className="flex items-center justify-center cursor-pointer peer-checked:animate-spin"
           >
-            <input
-              id="checkbox"
-              type="checkbox"
-              className="hidden peer"
-              ref={checkboxRef}
+            <Image
+              src="/images/my-logo.png"
+              alt="logo"
+              width={30}
+              height={30}
+              className="rounded-md"
             />
-            <label
-              htmlFor="checkbox"
-              className="peer-checked:border peer-checked:border-black peer-checked:border-r-0 w-10 h-10 flex justify-center items-center cursor-pointer rounded-l-md"
-              onClick={onClickCheckBox}
+          </label>
+          <div className="flex items-center justify-center">
+            <form
+              onSubmit={onSubmitAddress}
+              className="flex items-center justify-end relative"
+            >
+              <input
+                id="checkbox"
+                type="checkbox"
+                className="hidden peer"
+                ref={checkboxRef}
+              />
+              <label
+                htmlFor="checkbox"
+                className="peer-checked:border peer-checked:border-black peer-checked:border-r-0 w-10 h-10 flex justify-center items-center cursor-pointer rounded-l-md"
+                onClick={onClickCheckBox}
+              >
+                <Image
+                  src="/svgs/search.svg"
+                  alt="search-icon"
+                  width={30}
+                  height={30}
+                />
+              </label>
+              <label htmlFor="addressInput"></label>
+              <input
+                id="addressInput"
+                type="text"
+                onChange={onChangeAddress}
+                value={address}
+                placeholder="검색 해보세요"
+                className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md outline-none"
+                ref={inputAddressRef}
+              />
+              <div
+                className="font-bold justify-center items-center hidden absolute bottom-0 right-0 -translate-x-10 translate-y-14 w-36 h-10 bg-[#f51800] text-white rounded-lg after:content-[''] after:absolute after:border-[8px] after:border-t-transparent after:border-r-transparent after:border-b-[#f51800] after:border-l-transparent after:right-1/2 after:bottom-full z-10 text-center"
+                ref={errorAddressRef}
+              >
+                주소가 이상해요
+              </div>
+              <button type="submit"></button>
+            </form>
+            <div
+              className="w-10 h-10 flex justify-center items-center cursor-pointer"
+              onClick={onClickCurrentLocation}
             >
               <Image
-                src="/svgs/search.svg"
-                alt="search-icon"
+                src="/svgs/locationMarker.svg"
+                alt="current-location-icon"
                 width={30}
                 height={30}
               />
-            </label>
-            <label htmlFor="addressInput"></label>
-            <input
-              id="addressInput"
-              type="text"
-              onChange={onChangeAddress}
-              value={address}
-              placeholder="검색 해보세요"
-              className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md outline-none"
-              ref={inputAddressRef}
-            />
-            <div
-              className="font-bold justify-center items-center hidden absolute bottom-0 right-0 -translate-x-10 translate-y-14 w-36 h-10 bg-[#f51800] text-white rounded-lg after:content-[''] after:absolute after:border-[8px] after:border-t-transparent after:border-r-transparent after:border-b-[#f51800] after:border-l-transparent after:right-1/2 after:bottom-full z-10 text-center"
-              ref={errorAddressRef}
-            >
-              주소가 이상해요
             </div>
-            <button type="submit"></button>
-          </form>
-          <div
-            className="w-10 h-10 flex justify-center items-center"
-            onClick={onClickCurrentLocation}
-          >
-            <Image
-              src="/svgs/locationMarker.svg"
-              alt="current-location-icon"
-              width={30}
-              height={30}
-            />
           </div>
         </div>
       </div>

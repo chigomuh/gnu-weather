@@ -4,7 +4,7 @@
 
 ## 구현
 
-- [ ] 학교 마스코트
+- [x] 학교 마스코트
 - [x] 현재 예보, 현재 미세먼지, 초미세먼지 등급
 - [x] 단기 예보
 
@@ -17,6 +17,14 @@
 ### 슬라이더
 
 <img src="https://user-images.githubusercontent.com/84620459/181792188-898a26ce-f6a5-47b3-8de3-279502786e95.gif" width="300" height="500" />
+
+### 스켈레톤 로딩
+
+<img src="https://user-images.githubusercontent.com/84620459/182030213-c2353bea-a79e-4211-91cb-24be40126aa7.gif" width="300" height="500" />
+
+### ErrorBoundary로 에러 알려주기
+
+<img src="https://user-images.githubusercontent.com/84620459/182030265-87c6f372-e34d-43e5-b156-88ca353a8442.png" width="300" height="500" />
 
 ## 기상청 API
 

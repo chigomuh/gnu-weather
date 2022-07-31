@@ -30,8 +30,8 @@ const TodayWeather = ({ position }: Props) => {
 
   return (
     <>
-      <div>
-        <div className="space-y-2">
+      <div className="flex w-full justify-center items-center">
+        <div className="space-y-2 w-full max-w-4xl relative">
           <ErrorBoundary>
             <Suspense fallback={<AddressNameSK />}>
               <AddressName lat={lat} lng={lng} />

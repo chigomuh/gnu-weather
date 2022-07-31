@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       animation: {
-        waterSpin: "waterSpin 8s linear infinite",
+        waterSpin: "waterSpin 8s ease-in-out infinite",
         blink: "blink 3s linear infinite",
       },
     },
