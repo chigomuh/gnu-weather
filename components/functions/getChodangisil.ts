@@ -74,17 +74,10 @@ const getChodangisil = (
     categories,
   };
 
-  if (weatherData) {
-    return {
-      data: weatherData,
-      success: true,
-    };
-  } else {
-    return {
-      data: undefined,
-      success: false,
-    };
-  }
+  return {
+    data: weatherData,
+    success: true,
+  };
 };
 
 export default getChodangisil;

@@ -18,6 +18,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
   const [address, setAddress] = useState("");
   const checkboxRef = useRef<HTMLInputElement>(null);
   const inputAddressRef = useRef<HTMLInputElement>(null);
+  const errorAddressRef = useRef<HTMLDivElement>(null);
 
   const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -40,15 +41,34 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
 
       setCurrentLat(Number(searchLat));
       setCurrentLng(Number(searchLng));
+
+      const { current } = checkboxRef;
+      if (current) {
+        current.checked = false;
+      }
+
+      if (errorAddressRef.current) {
+        const {
+          current: { classList },
+        } = errorAddressRef;
+
+        classList.remove("peer-checked:flex");
+      }
     } else {
-      alert("주소를 다시 확인해주세요.");
+      if (errorAddressRef.current) {
+        const {
+          current: { classList },
+        } = errorAddressRef;
+
+        classList.add("peer-checked:flex");
+
+        setTimeout(() => {
+          classList.remove("peer-checked:flex");
+        }, 3000);
+      }
     }
 
     setAddress("");
-    const { current } = checkboxRef;
-    if (current) {
-      current.checked = false;
-    }
   };
 
   const onClickCheckBox = () => {
@@ -106,7 +126,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
         <div className="flex items-center justify-center">
           <form
             onSubmit={onSubmitAddress}
-            className="flex items-center justify-end"
+            className="flex items-center justify-end relative"
           >
             <input
               id="checkbox"
@@ -133,9 +153,15 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
               onChange={onChangeAddress}
               value={address}
               placeholder="검색 해보세요"
-              className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md"
+              className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md outline-none"
               ref={inputAddressRef}
             />
+            <div
+              className="font-bold justify-center items-center hidden absolute bottom-0 right-0 -translate-x-10 translate-y-14 w-36 h-10 bg-[#f51800] text-white rounded-lg after:content-[''] after:absolute after:border-[8px] after:border-t-transparent after:border-r-transparent after:border-b-[#f51800] after:border-l-transparent after:right-1/2 after:bottom-full z-10 text-center"
+              ref={errorAddressRef}
+            >
+              주소가 이상해요
+            </div>
             <button type="submit"></button>
           </form>
           <div

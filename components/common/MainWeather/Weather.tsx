@@ -1,28 +1,26 @@
 import { categories } from "components/configs/weather";
-import { CategoriesSil } from "components/functions/getChodangisil";
 import getWindDeg from "components/functions/getWindDeg";
+import useWeather from "hooks/useWeather";
 import Image from "next/image";
 
 interface Props {
-  category: CategoriesSil;
+  x: number;
+  y: number;
 }
 
-const Weather = ({ category }: Props) => {
-  const { DIF } = category;
+const Weather = ({ x, y }: Props) => {
+  const { data } = useWeather(x, y);
+
+  const {
+    categories: category,
+    categories: { DIF },
+  } = data;
   const isPlus = parseFloat(DIF) >= 0;
   const dif = isPlus ? parseFloat(DIF) : -parseFloat(DIF);
 
   return (
     <>
       <div className="space-y-4">
-        <div className="flex justify-center relative">
-          <Image
-            src="/images/mascot/gnu-basic.png"
-            width={200}
-            height={200}
-            alt="gnu-mascot"
-          />
-        </div>
         <div className="space-y-2 flex flex-col items-center">
           <div className="text-6xl font-bold">{category.T1H}°</div>
           <div className="flex text-2xl space-x-4">

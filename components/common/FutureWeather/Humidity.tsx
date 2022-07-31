@@ -5,7 +5,9 @@ interface Props {
 const Humidity = ({ reh }: Props) => {
   return (
     <>
-      <div>{reh}%</div>
+      <div className="w-10 h-10 flex border justify-center items-center rounded-full bg-[#F0EDCC] text-[#02343F] font-bold">
+        {reh}
+      </div>
     </>
   );
 };

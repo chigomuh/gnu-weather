@@ -1,5 +1,6 @@
 import getBaseDateTime from "components/functions/getBaseDateTime";
 import getChodangisil from "components/functions/getChodangisil";
+import getDangi from "components/functions/getDangi";
 import getNowTime from "components/functions/getNowTime";
 import useSWR from "swr";
 
@@ -47,35 +48,35 @@ const useWeather = (nx: number, ny: number) => {
   const nowTime = getNowTime(baseTime);
   const url = `${URL_ORIGIN}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
-  const { data, error } = useSWR(url, fetcher);
-  const failReturnData = {
-    data: undefined,
-    success: false,
-    isLoading: !error && !data,
-    isError: error,
-  };
+  const { data } = useSWR(url, fetcher, { suspense: true });
 
-  const isNullData =
-    !data ||
-    !data.data.response.body ||
-    !data.dataY.response.body ||
-    !data.dataSky.response.body;
+  const items = data.data.response.body.items.item;
+  const itemsY = data.dataY.response.body.items.item;
+  const itemsSky = data.dataSky.response.body.items.item;
+  const mainSil = getChodangisil(items, itemsY, itemsSky, nowTime);
 
-  if (!isNullData) {
-    const items = data.data.response.body.items.item;
-    const itemsY = data.dataY.response.body.items.item;
-    const itemsSky = data.dataSky.response.body.items.item;
-    const mainSil = getChodangisil(items, itemsY, itemsSky, nowTime);
-
-    return {
-      data: mainSil.data,
-      success: true,
-      isLoading: !error && !data,
-      isError: error,
-    };
-  } else {
-    return failReturnData;
+  let isMissingData = false;
+  const {
+    data: { categories },
+  } = mainSil;
+  for (let k in categories) {
+    if (+categories[k] >= 900 || +categories <= -900) {
+      isMissingData = true;
+      break;
+    }
   }
+
+  if (isMissingData) {
+    return {
+      data,
+      success: false,
+    };
+  }
+
+  return {
+    data: mainSil.data,
+    success: true,
+  };
 };
 
 export default useWeather;

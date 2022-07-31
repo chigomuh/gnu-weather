@@ -18,7 +18,7 @@ interface Props {
 const FutureWeather = ({ position }: Props) => {
   const [currenOpenTap, setCurrenOpenTap] = useState("weather");
   const { x, y } = position;
-  const { data, isLoading, isError } = useFutureWeather(x, y);
+  const { data } = useFutureWeather(x, y);
   const [sliderX, setSliderX] = useState(0);
   const SliderRef = useRef<HTMLDivElement>(null);
 
@@ -52,8 +52,6 @@ const FutureWeather = ({ position }: Props) => {
     setSliderX(0);
   };
 
-  if (isLoading) return <div>로딩</div>;
-  if (isError) return <div>에러</div>;
   return (
     <>
       <div className="overflow-x-hidden">
@@ -99,7 +97,7 @@ const FutureWeather = ({ position }: Props) => {
                   <React.Fragment
                     key={`${weather.fcstDate}${weather.fcstTime}`}
                   >
-                    <div className="space-y-2">
+                    <div className="space-y-2 flex flex-col items-center">
                       {currenOpenTap === "weather" && (
                         <Weather
                           tmp={weather.TMP}

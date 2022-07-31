@@ -5,6 +5,8 @@ import dfsXyConv from "components/functions/dfsXyConv";
 import TodayWeather from "components/common/MainWeather/TodayWeather";
 import FutureWeather from "components/common/FutureWeather/FutureWeather";
 import Nav from "components/layout/MainWeather/Nav";
+import Suspense from "components/common/Suspense";
+import BoxSK from "components/common/FutureWeather/skeleton/BoxSK";
 
 const Home: NextPage = () => {
   const { defaultLatitude, defaultLongitude } = {
@@ -23,7 +25,9 @@ const Home: NextPage = () => {
       <Nav setCurrentLat={setCurrentLat} setCurrentLng={setCurrentLng} />
       <div className="space-y-10">
         <TodayWeather position={todayPosition} />
-        <FutureWeather position={position} />
+        <Suspense fallback={<BoxSK />}>
+          <FutureWeather position={position} />
+        </Suspense>
       </div>
     </>
   );

@@ -80,17 +80,10 @@ const getDangi = (items: Item[]) => {
     });
   }
 
-  if (weatherData.length !== 0) {
-    return {
-      data: weatherData,
-      success: true,
-    };
-  } else {
-    return {
-      data: undefined,
-      success: false,
-    };
-  }
+  return {
+    data: weatherData,
+    success: true,
+  };
 };
 
 export default getDangi;

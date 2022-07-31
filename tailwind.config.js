@@ -11,9 +11,14 @@ module.exports = {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        blink: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: ".5" },
+        },
       },
       animation: {
         waterSpin: "waterSpin 8s linear infinite",
+        blink: "blink 3s linear infinite",
       },
     },
   },

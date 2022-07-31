@@ -10,28 +10,15 @@ const useFutureWeather = (nx: number, ny: number) => {
   const { baseDate, baseTime } = getBaseDateTime(type);
   const url = `${URL_ORIGIN}/api/weather?baseDate=${baseDate}&baseTime=${baseTime}&nx=${nx}&ny=${ny}&type=${type}`;
 
-  const { data, error } = useSWR(url, fetcher);
+  const { data } = useSWR(url, fetcher, { suspense: true });
 
-  const failReturnData = {
-    data: undefined,
-    success: false,
-    isLoading: !error && !data,
-    isError: error,
+  const items = data.data.response.body.items.item;
+  const dangiData = getDangi(items);
+
+  return {
+    data: dangiData.data,
+    success: true,
   };
-
-  if (data && data.data.response.body) {
-    const items = data.data.response.body.items.item;
-    const dangiData = getDangi(items);
-
-    return {
-      data: dangiData.data,
-      success: true,
-      isLoading: !error && !data,
-      isError: error,
-    };
-  } else {
-    return failReturnData;
-  }
 };
 
 export default useFutureWeather;
