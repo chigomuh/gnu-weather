@@ -21,7 +21,7 @@ const Loading = () => {
             </div>
           </div>
           <div className="w-full h-60 bg-[#00539C] absolute bottom-0 rounded-3xl translate-y-8 flex justify-center items-center z-0">
-            <Link href="/weather">
+            <Link href="/">
               <a className="w-full h-10 flex items-center justify-center mx-4 rounded-full bg-[#FCEDDA] text-[#00539C] font-bold animate-shake">
                 날씨 확인하기
               </a>
