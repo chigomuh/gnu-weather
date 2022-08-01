@@ -35,11 +35,17 @@ const AddressName = ({ lat, lng }: Props) => {
     { suspense: true }
   );
 
+  const addressNameArr = data?.data.documents[0].address_name.split(" ");
+  const lastAddressName = addressNameArr?.pop();
+  const firstAddressName = addressNameArr?.join(" ");
+  console.log(firstAddressName);
+
   return (
     <>
       {data && (
-        <div className="text-center text-xl font-bold">
-          {data.data.documents[0].address_name}
+        <div className="pl-4">
+          <span className="text-xl font-bold">{lastAddressName}</span>
+          <div>{firstAddressName}</div>
         </div>
       )}
     </>

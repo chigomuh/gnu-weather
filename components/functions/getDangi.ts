@@ -2,7 +2,7 @@ import { Item } from "hooks/useWeather";
 import moment from "moment-timezone";
 import plusZero from "./plusZero";
 
-interface WeatherData {
+export interface WeatherData {
   [key: string]: string | number;
   PCP: string;
   POP: string;

@@ -9,7 +9,6 @@ import WeatherSK from "components/common/MainWeather/skeleton/WeatherSK";
 import DustSK from "components/common/MainWeather/skeleton/DustSK";
 import AddressNameSK from "components/common/MainWeather/skeleton/AddressNameSK";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import Image from "next/image";
 
 interface Props {
   position: Position;
@@ -30,29 +29,23 @@ const TodayWeather = ({ position }: Props) => {
 
   return (
     <>
-      <div className="flex w-full justify-center items-center">
-        <div className="space-y-2 w-full max-w-4xl relative">
-          <ErrorBoundary>
-            <Suspense fallback={<AddressNameSK />}>
-              <AddressName lat={lat} lng={lng} />
-            </Suspense>
-          </ErrorBoundary>
-          <div className="flex justify-center relative">
-            <Image
-              src="/images/mascot/gnu-basic.png"
-              width={200}
-              height={200}
-              alt="gnu-mascot"
-            />
+      <div className="flex w-full justify-center items-center z-40">
+        <div className="w-full max-w-4xl relative">
+          <div className="flex justify-between mt-14">
+            <ErrorBoundary>
+              <Suspense fallback={<AddressNameSK />}>
+                <AddressName lat={lat} lng={lng} />
+              </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <Suspense fallback={<DustSK />}>
+                <Dust lat={lat} lng={lng} />
+              </Suspense>
+            </ErrorBoundary>
           </div>
           <ErrorBoundary>
             <Suspense fallback={<WeatherSK />}>
               <Weather x={x} y={y} />
-            </Suspense>
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <Suspense fallback={<DustSK />}>
-              <Dust lat={lat} lng={lng} />
             </Suspense>
           </ErrorBoundary>
         </div>

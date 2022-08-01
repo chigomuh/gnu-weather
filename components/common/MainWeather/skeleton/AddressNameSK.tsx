@@ -1,8 +1,9 @@
 const AddressNameSK = () => {
   return (
     <>
-      <div className="w-full flex justify-center items-center">
-        <div className="w-60 h-10 bg-gray-300 rounded-lg animate-blink"></div>
+      <div className="px-4 space-y-1">
+        <div className="w-20 h-6 bg-gray-300 rounded-lg animate-blink"></div>
+        <div className="w-40 h-6 bg-gray-300 rounded-lg animate-blink"></div>
       </div>
     </>
   );

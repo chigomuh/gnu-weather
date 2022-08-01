@@ -1,12 +1,8 @@
 import useFutureWeather from "hooks/useFutureWeather";
 import { useRef, useState } from "react";
-import Weather from "components/common/FutureWeather/Weather";
-import Precipitation from "components/common/FutureWeather/Precipitation";
-import Windy from "components/common/FutureWeather/Windy";
-import Humidity from "components/common/FutureWeather/Humidity";
-import FcstTime from "components/common/FutureWeather/FcstTime";
 import ButtonTap from "components/common/ButtonTap";
 import Arrow from "components/common/Arrow";
+import WeatherCard from "./WeatherCard";
 
 const userControlTap = [
   {
@@ -73,60 +69,37 @@ const FutureWeather = ({ position }: Props) => {
 
   return (
     <>
-      <div className="w-full flex justify-center items-center">
-        <div className="overflow-x-hidden w-full max-w-4xl">
-          <div className="flex space-x-10 w-full justify-center h-10 items-center text-xl">
-            {userControlTap.map((tap) => (
-              <ButtonTap
-                key={tap.id}
-                tapId={tap.id}
-                title={tap.title}
-                currentOpen={currenOpenTap}
-                onClick={onClickTap}
-              />
-            ))}
-          </div>
-          <div className="relative flex justify-center">
-            <Arrow direction="left" onClick={onClickSlider} />
-            <Arrow direction="right" onClick={onClickSlider} />
-            <div className="w-4/5 h-full overflow-x-hidden text-center">
-              <div
-                className="flex space-x-4 whitespace-nowrap transition-transform duration-300"
-                style={{
-                  transform: `translateX(-${sliderX}px)`,
-                }}
-                ref={SliderRef}
-              >
-                {data &&
-                  data.map((weather) => (
-                    <div
-                      key={`${weather.fcstDate}${weather.fcstTime}`}
-                      className="space-y-2 flex flex-col items-center"
-                    >
-                      {currenOpenTap === "weather" && (
-                        <Weather
-                          tmp={weather.TMP}
-                          sky={weather.SKY}
-                          pty={weather.PTY}
-                          time={weather.fcstTime}
-                        />
-                      )}
-                      {currenOpenTap === "precipitation" && (
-                        <Precipitation pop={weather.POP} pcp={weather.PCP} />
-                      )}
-                      {currenOpenTap === "windy" && (
-                        <Windy wsd={weather.WSD} vec={weather.VEC} />
-                      )}
-                      {currenOpenTap === "humidity" && (
-                        <Humidity reh={weather.REH} />
-                      )}
-                      <FcstTime
-                        date={weather.fcstDate}
-                        time={weather.fcstTime}
-                      />
-                    </div>
-                  ))}
-              </div>
+      <div className="overflow-x-hidden w-full max-w-4xl absolute bottom-0 z-50 rounded-t-3xl bg-slate-100 h-48">
+        <div className="flex space-x-10 w-full justify-center h-1/5 items-center text-xl text-black">
+          {userControlTap.map((tap) => (
+            <ButtonTap
+              key={tap.id}
+              tapId={tap.id}
+              title={tap.title}
+              currentOpen={currenOpenTap}
+              onClick={onClickTap}
+            />
+          ))}
+        </div>
+        <div className="relative flex justify-center h-4/5 w-full">
+          <Arrow direction="left" onClick={onClickSlider} />
+          <Arrow direction="right" onClick={onClickSlider} />
+          <div className="w-4/5 h-full overflow-x-hidden text-center">
+            <div
+              className="flex space-x-4 whitespace-nowrap transition-transform duration-300 h-full w-full items-center pl-2"
+              style={{
+                transform: `translateX(-${sliderX}px)`,
+              }}
+              ref={SliderRef}
+            >
+              {data &&
+                data.map((weather) => (
+                  <WeatherCard
+                    key={`${weather.fcstDate}${weather.fcstTime}`}
+                    weather={weather}
+                    currenOpenTap={currenOpenTap}
+                  />
+                ))}
             </div>
           </div>
         </div>

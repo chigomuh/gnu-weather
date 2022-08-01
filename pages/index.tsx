@@ -7,6 +7,7 @@ import FutureWeather from "components/common/FutureWeather/FutureWeather";
 import Nav from "components/layout/MainWeather/Nav";
 import Suspense from "components/common/Suspense";
 import BoxSK from "components/common/FutureWeather/skeleton/BoxSK";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const { defaultLatitude, defaultLongitude } = {
@@ -21,13 +22,23 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Seo title="오늘의 날씨" />
-      <Nav setCurrentLat={setCurrentLat} setCurrentLng={setCurrentLng} />
-      <div className="space-y-8">
-        <TodayWeather position={todayPosition} />
-        <Suspense fallback={<BoxSK />}>
-          <FutureWeather position={position} />
-        </Suspense>
+      <div className="w-screen h-screen flex justify-center overflow-hidden text-white font-sans">
+        <div className="w-full h-full max-w-4xl">
+          <Seo title="오늘의 날씨" />
+          <Nav setCurrentLat={setCurrentLat} setCurrentLng={setCurrentLng} />
+          <TodayWeather position={todayPosition} />
+          <div className="flex justify-center relative">
+            <Image
+              src="/images/mascot/gnu-basic.png"
+              alt="gnu-mascot"
+              width={300}
+              height={400}
+            />
+          </div>
+          <Suspense fallback={<BoxSK />}>
+            <FutureWeather position={position} />
+          </Suspense>
+        </div>
       </div>
     </>
   );

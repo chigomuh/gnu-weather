@@ -38,7 +38,12 @@ const Precipitation = ({ pop, pcp }: Props) => {
             ></div>
           </div>
         </div>
-        <div>{pcp === "강수없음" ? `-` : pcp}</div>
+        <div>
+          {pcp === "강수없음" ? `-` : `${pcp.slice(0, -2)}`}
+          <span className="text-[1px]">
+            {pcp === "강수없음" ? "" : `${pcp.slice(-2)}`}
+          </span>
+        </div>
       </div>
     </>
   );

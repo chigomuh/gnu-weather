@@ -114,7 +114,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
 
   return (
     <>
-      <div className="flex w-full justify-center items-center">
+      <nav className="fixed flex w-full justify-center items-center z-50 text-white h-14">
         <div className="flex items-center justify-between w-full max-w-4xl p-2">
           <input type="checkbox" id="logoInput" className="hidden peer" />
           <label
@@ -159,7 +159,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
                 onChange={onChangeAddress}
                 value={address}
                 placeholder="검색 해보세요"
-                className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md outline-none"
+                className="w-0 peer-checked:w-full peer-checked:border peer-checked:border-black max-w-[200px] h-10 transition-all duration-500 peer-checked:px-4 rounded-r-md outline-none bg-transparent"
                 ref={inputAddressRef}
               />
               <div
@@ -183,7 +183,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };

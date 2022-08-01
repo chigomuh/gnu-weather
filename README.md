@@ -2,6 +2,10 @@
 
 > 날씨와 미세먼지 정보를 제공합니다.
 
+## 데모
+
+[`오늘의 날씨`](https://gnu-weather.vercel.app/)
+
 ## 구현
 
 - [x] 학교 마스코트
@@ -139,3 +143,15 @@ const date = koreaTime.date(); // dd
 > 막막하였으나 하나의 사이트를 발견하여 쉽게 해결하였다
 
 - [`fancy-border-radius`](https://9elements.github.io/fancy-border-radius/full-control.html)
+
+### IOS, overflow-hidden / border-radius 적용 오류
+
+> chrome과 android에서는 작동하던 `overflow-hidden` / `border-radius` 속성이 작동하지 않는 현상이 있다.
+
+#### 해결
+
+- `border-radius`
+- - 물방울을 하나 더 만들어서 해당 물방울에 border 적용
+- - 총 2개의 물방울 (1. 뒷 배경 2. 채우기 용)
+- `overflow-hidden`
+- - 해당 요소에(overflow 적용 대상)&nbsp; `relative` 속성 적용

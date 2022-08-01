@@ -23,7 +23,10 @@ const Windy = ({ wsd, vec }: Props) => {
           height={25}
         />
       </div>
-      <div>{wsd}m/s</div>
+      <div>
+        {wsd}
+        <span className="text-[1px]">m/s</span>
+      </div>
     </>
   );
 };

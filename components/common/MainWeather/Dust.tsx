@@ -31,7 +31,7 @@ const Dust = ({ lat, lng }: Props) => {
   return (
     <>
       {data && (
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center space-x-4 pr-4">
           <BlockInfo
             mainText={["미세먼지", dustGrade[+data.data.pm10] ?? "-"]}
             noticeText={

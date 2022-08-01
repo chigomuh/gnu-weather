@@ -11,7 +11,8 @@ const ButtonTap = ({ tapId, title, currentOpen, onClick }: Props) => {
       <button
         className="cursor-pointer"
         style={{
-          opacity: currentOpen === tapId ? 1 : 0.5,
+          opacity: currentOpen === tapId ? 1 : 0.7,
+          fontWeight: currentOpen === tapId ? "bold" : "",
         }}
         onClick={() => onClick(tapId)}
       >
