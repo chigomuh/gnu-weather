@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo title="Home" />
-      <div className="w-screen h-screen overflow-hidden">
+      <div className="w-screen h-screen overflow-hidden flex justify-center">
         <div className="relative w-full h-full max-w-4xl bg-[#FCEDDA] flex-col">
           <h1 className="text-4x text-4xl font-bold p-8 text-[#7b9acc]">
             궁금한 날씨
