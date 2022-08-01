@@ -11,13 +11,16 @@ const Precipitation = ({ pop, pcp }: Props) => {
         <div>{pop}%</div>
         <div className="flex items-center justify-center">
           <div
+            className="absolute rotate-45 border-2 border-[#676bd0] w-8 h-8"
+            style={{
+              borderRadius: "0% 100% 45% 55% / 0% 55% 45% 100%",
+            }}
+          ></div>
+          <div
             className="w-8 h-8 rotate-45"
             style={{
               borderRadius: "0% 100% 45% 55% / 0% 55% 45% 100%",
-              // border: "2px solid #676bd0",
-              isolation: "isolate",
               overflow: "hidden",
-              zIndex: 0,
             }}
           >
             <div
