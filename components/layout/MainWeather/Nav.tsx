@@ -114,7 +114,7 @@ const Nav = ({ setCurrentLat, setCurrentLng }: Props) => {
 
   return (
     <>
-      <nav className="fixed flex w-full justify-center items-center z-50 text-white h-14">
+      <nav className="fixed w-full justify-center items-center z-50 text-white h-14">
         <div className="flex items-center justify-between w-full max-w-4xl p-2">
           <input type="checkbox" id="logoInput" className="hidden peer" />
           <label

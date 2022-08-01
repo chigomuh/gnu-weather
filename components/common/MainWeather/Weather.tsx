@@ -38,7 +38,7 @@ const Weather = ({ x, y }: Props) => {
   return (
     <>
       <div
-        className="w-screen h-screen absolute top-0 left-0 z-[-1]"
+        className="w-screen h-screen absolute top-0 left-0 z-[-1] max-w-4xl"
         style={{
           backgroundColor: category.PTY !== "0" ? ptyBg : skyBg,
         }}
