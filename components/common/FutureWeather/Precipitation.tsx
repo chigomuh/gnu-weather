@@ -17,7 +17,7 @@ const Precipitation = ({ pop, pcp }: Props) => {
             }}
           ></div>
           <div
-            className="w-8 h-8 rotate-45 z-50 overflow-hidden overflow-x-hidden overflow-y-hidden"
+            className="w-8 h-8 rotate-45 overflow-hidden relative"
             style={{
               borderRadius: "0% 100% 45% 55% / 0% 55% 45% 100%",
             }}
@@ -29,7 +29,7 @@ const Precipitation = ({ pop, pcp }: Props) => {
                   : +pop === 100
                   ? "left-[-15%] top-[-15%]"
                   : ""
-              } bg-[#676bd0] w-[150%] h-[150%] absolute rounded-2xl animate-waterSpin z-0`}
+              } bg-[#676bd0] w-[150%] h-[150%] absolute rounded-2xl animate-waterSpin`}
               style={{
                 left: `${75 - +pop}%`,
                 top: `${75 - +pop}%`,
