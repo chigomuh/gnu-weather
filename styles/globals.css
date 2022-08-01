@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.overflow-hidden-custom {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  overflow: hidden;
+}
